@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import ThemeContext from './ThemeContext';
-import {darkTheme, ITheme, lightTheme} from "./themes";
+import ThemeContext, {ThemeType} from './ThemeContext';
 
 const ThemeProvider = (props: { children: any }) => {
-    const [theme, setTheme] = useState<ITheme>(lightTheme);
+    const [theme, setTheme] = useState<ThemeType>(ThemeType.DARK);
 
     const toggleTheme = function () {
-        setTheme((theme) => theme === lightTheme ? darkTheme : lightTheme);
+        setTheme((theme) => theme === ThemeType.LIGHT ? ThemeType.DARK : ThemeType.LIGHT);
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ type: theme, toggleTheme }}>
             { props.children }
         </ThemeContext.Provider>
     );

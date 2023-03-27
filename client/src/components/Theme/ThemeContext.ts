@@ -1,11 +1,15 @@
 import {createContext} from "react";
-import {ITheme} from "./themes";
+
+export enum ThemeType {
+    DARK,
+    LIGHT
+}
 
 export interface IThemeContext {
-    theme: ITheme | null,
+    type: ThemeType,
     toggleTheme: () => void
 }
 
-const ThemeContext = createContext<IThemeContext>({ theme: null, toggleTheme: () => {} });
+const ThemeContext = createContext<IThemeContext>({ type: ThemeType.DARK, toggleTheme: () => {} });
 
 export default ThemeContext;

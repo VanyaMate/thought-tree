@@ -1,7 +1,20 @@
+@import "src/styles/colors";
+
 .button {
-    border: 1px solid transparent;
     outline: none;
     padding: 5px;
 
     transition: .2s;
+
+    &.light {
+        border: 1px solid $markBlueLight;
+        background: $white;
+        color: $darkBlack;
+    }
+
+    &.dark {
+        border: 1px solid $markBlueLight;
+        background: $darkBlack;
+        color: $white;
+    }
 }
