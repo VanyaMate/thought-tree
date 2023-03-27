@@ -1,0 +1,10 @@
+.button {
+    pointer-events: none;
+    opacity: .8;
+
+    &.active {
+        cursor: pointer;
+        pointer-events: auto;
+        opacity: 1;
+    }
+}
