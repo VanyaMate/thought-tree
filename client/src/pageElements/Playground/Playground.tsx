@@ -1,4 +1,4 @@
-import React, {EventHandler, UIEventHandler, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import css from './Playground.module.scss';
 import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
 import PlaygroundScrollContainer from "../../components/PlaygroundScrollContainer/PlaygroundScrollContainer";

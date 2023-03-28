@@ -5,7 +5,7 @@ export interface IPlayground {
     coords: ICoords,
     currentCoords: ICoords,
     mouseStartCoords: ICoords,
-    mouseCoords: ICoords
+    mouseCoords: ICoords,
 }
 
 export interface ICoords {
@@ -38,8 +38,6 @@ export const playgroundSlice = createSlice({
                 x: x < 0 ? 0 : x,
                 y: y < 0 ? 0 : y,
             }
-
-            console.log(state.currentCoords);
         },
         setPlaygroundCoordsToCurrent (state) {
             state.coords = state.currentCoords;
@@ -47,9 +45,9 @@ export const playgroundSlice = createSlice({
         setPlaygroundCoords (state, action: PayloadAction<ICoords>) {
             state.coords = action.payload;
         },
-        setScrolled (state, action: PayloadAction<boolean>) {
+        setPlaygroundScrolled (state, action: PayloadAction<boolean>) {
             state.scrolled = action.payload
-        }
+        },
     }
 })
 
