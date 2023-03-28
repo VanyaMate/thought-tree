@@ -1,7 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface IPlayground {
-    coords: ICoords
+    scrolled: boolean,
+    coords: ICoords,
+    currentCoords: ICoords,
+    mouseStartCoords: ICoords,
+    mouseCoords: ICoords
 }
 
 export interface ICoords {
@@ -10,15 +14,41 @@ export interface ICoords {
 }
 
 const initialState: IPlayground = {
-    coords: { x: 0, y: 0 }
+    scrolled: false,
+    coords: { x: 0, y: 0 },
+    currentCoords: { x: 0, y: 0 },
+    mouseStartCoords: { x: 0, y: 0 },
+    mouseCoords: { x: 0, y: 0 },
 };
 
 export const playgroundSlice = createSlice({
     name: 'playground',
     initialState,
     reducers: {
+        setPlaygroundMouseStartCoords (state, action: PayloadAction<ICoords>) {
+            state.mouseStartCoords = action.payload;
+        },
+        setPlaygroundMouseCoords (state, action: PayloadAction<ICoords>) {
+            state.mouseCoords = action.payload;
+
+            const x = state.coords.x + state.mouseStartCoords.x - state.mouseCoords.x;
+            const y = state.coords.y + state.mouseStartCoords.y - state.mouseCoords.y;
+
+            state.currentCoords = {
+                x: x < 0 ? 0 : x,
+                y: y < 0 ? 0 : y,
+            }
+
+            console.log(state.currentCoords);
+        },
+        setPlaygroundCoordsToCurrent (state) {
+            state.coords = state.currentCoords;
+        },
         setPlaygroundCoords (state, action: PayloadAction<ICoords>) {
             state.coords = action.payload;
+        },
+        setScrolled (state, action: PayloadAction<boolean>) {
+            state.scrolled = action.payload
         }
     }
 })
