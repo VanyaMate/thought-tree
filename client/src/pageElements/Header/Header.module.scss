@@ -1,0 +1,20 @@
+@import "src/styles/sizes";
+@import "src/styles/colors";
+
+.container {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    height: $mediumHeight;
+    box-shadow: $defaultLightBoxShadow;
+
+    &.light {
+        background: $white;
+        color: $darkBlack;
+    }
+
+    &.dark {
+        background: $darkBlack;
+        color: $white;
+    }
+}

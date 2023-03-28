@@ -1,10 +1,17 @@
 import React from 'react';
+import css from './Header.module.scss';
+import {useActions, useMySelector} from "../../hooks/redux.hook";
+import Button from "../../components/UI/Buttons/Button/Button";
+import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
 
 const Header = () => {
+    const { toggleTheme } = useActions();
+
     return (
-        <div>
+        <ThemeContainer light={css.light} dark={css.dark} className={css.container}>
             Header
-        </div>
+            <Button onClick={toggleTheme} active>Изменить</Button>
+        </ThemeContainer>
     );
 };
 

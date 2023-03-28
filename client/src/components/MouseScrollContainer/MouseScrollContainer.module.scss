@@ -1,0 +1,48 @@
+@import "src/styles/colors";
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 150%;
+    min-height: 250%;
+
+
+    &.light {
+        background-color: $white;
+        background-image:
+                linear-gradient($white 1px, transparent 5px),
+                linear-gradient(90deg, $white 1px, transparent 5px),
+                linear-gradient($markBlueLight 1px, transparent 1px),
+                linear-gradient(90deg, $markBlueLight 1px, transparent 1px);
+        background-size:
+                20px 20px,
+                20px 20px,
+                100px 100px,
+                100px 100px;
+        background-position:
+                -1px -1px,
+                -1px -1px,
+                -1px -1px,
+                -1px -1px;
+    }
+
+    &.dark {
+        background-color: $darkBlack;
+        background-image:
+                linear-gradient($darkBlack 1px, transparent 5px),
+                linear-gradient(90deg, $darkBlack 1px, transparent 5px),
+                linear-gradient($markBlueLight 1px, transparent 1px),
+                linear-gradient(90deg, $markBlueLight 1px, transparent 1px);
+        background-size:
+                20px 20px,
+                20px 20px,
+                100px 100px,
+                100px 100px;
+        background-position:
+                -1px -1px,
+                -1px -1px,
+                -1px -1px,
+                -1px -1px;
+    }
+}

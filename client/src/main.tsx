@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './styles/index.scss';
-import ThemeProvider from "./components/Theme/ThemeProvider";
+import './styles/fonts.scss';
+import {Provider} from "react-redux";
+import {store} from "./store/index.store";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <ThemeProvider>
+        <Provider store={store}>
             <App />
-        </ThemeProvider>
+        </Provider>
     </React.StrictMode>,
 )

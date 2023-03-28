@@ -1,0 +1,18 @@
+@import "src/styles/sizes";
+@import "src/styles/colors";
+
+.container {
+    position: relative;
+    width: 100%;
+    height: $smallHeight;
+
+    &.light {
+        background: $white;
+        color: $darkBlack;
+    }
+
+    &.dark {
+        background: $darkBlack;
+        color: $white;
+    }
+}

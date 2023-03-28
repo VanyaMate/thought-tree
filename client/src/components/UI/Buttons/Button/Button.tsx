@@ -1,20 +1,25 @@
 import React from 'react';
 import {IDefaultComponent} from "../../../IDefaultComponent";
 import css from './Button.module.scss';
+import ThemeContainer from "../ThemeContainer/ThemeContainer";
 
 export interface IButton extends IDefaultComponent{
-    label: string,
     onClick: () => void
     active?: boolean
 }
 
 const Button: React.FC<IButton> = (props) => {
-    const { label, className, active, ...other } = props;
+    const { className, active, ...other } = props;
 
     return (
-        <button {...other} className={[css.button, active ? css.active : '', className].join(' ')}>
-            { label }
-        </button>
+        <ThemeContainer
+            light={css.light}
+            dark={css.dark}
+            {...other}
+            className={[css.button, active ? css.active : '', className].join(' ')}
+        >
+            { props.children }
+        </ThemeContainer>
     );
 };
 

@@ -2,14 +2,15 @@ import React from 'react';
 import Header from "./pageElements/Header/Header";
 import Playground from "./pageElements/Playground/Playground";
 import Bottom from "./pageElements/Bottom/Bottom";
+import Gui from "./pageElements/Gui/Gui";
 
 const App = () => {
     return (
-        <div>
+        <Gui>
             <Header/>
             <Playground/>
             <Bottom/>
-        </div>
+        </Gui>
     );
 };
 

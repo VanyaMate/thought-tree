@@ -1,19 +1,18 @@
+@import "src/styles/sizes";
 @import "src/styles/colors";
 
-.button {
-    outline: none;
-    padding: 5px;
-
-    transition: .2s;
+.container {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - #{$mediumHeight} - #{$smallHeight});
+    overflow: scroll;
 
     &.light {
-        border: 1px solid $markBlueLight;
         background: $white;
         color: $darkBlack;
     }
 
     &.dark {
-        border: 1px solid $markBlueLight;
         background: $darkBlack;
         color: $white;
     }

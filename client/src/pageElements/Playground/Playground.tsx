@@ -1,16 +1,25 @@
-import React, {useContext} from 'react';
-import Button from "../../components/UI/Buttons/Button/Button";
-import ThemeContext from "../../components/Theme/ThemeContext";
-import TextButton from "../../components/styledComponents/TextButton/TextButton";
+import React, {useState} from 'react';
+import css from './Playground.module.scss';
+import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
+import MouseScrollContainer from "../../components/MouseScrollContainer/MouseScrollContainer";
 
 const Playground = () => {
-    const { toggleTheme } = useContext(ThemeContext);
+    const [draggable, setDraggable] = useState<boolean>(false);
+    const [startDragCoords, setStartDragCoords] = useState<{x: number, y: number}>({x: 0, y: 0})
+
+    const onMouseDown = function (e: React.MouseEventHandler) {
+        console.log(e);
+        setDraggable(true);
+    }
+
+    const onMouseUp = function () {
+        setDraggable(false);
+    }
 
     return (
-        <div>
-            Playground
-            <TextButton label={'Изменить тему'} onClick={toggleTheme} active={true}/>
-        </div>
+        <ThemeContainer light={css.light} dark={css.dark} className={css.container}>
+            <MouseScrollContainer/>
+        </ThemeContainer>
     );
 };
 
