@@ -1,20 +1,18 @@
 import React from 'react';
 import {IDefaultComponent} from "../../../IDefaultComponent";
 import {useMySelector} from "../../../../hooks/redux.hook";
-import {Theme} from "../../../../store/theme/theme.slice";
 
 export interface IThemeContainer extends IDefaultComponent {
-    light: string,
-    dark: string
+    themeStyles: { [key: string]: string }
 }
 
 const ThemeContainer: React.FC<IThemeContainer> = (props) => {
     const theme = useMySelector(state => state.theme);
-    const { className, light, dark, ...other } = props;
+    const { className, themeStyles, ...other } = props;
 
     return (
-        <div className={[className, theme.type === Theme.LIGHT ? light : dark].join(' ')} {...other}/>
+        <div className={[className, themeStyles[theme.type] || themeStyles['dark']].join(' ')} {...other}/>
     );
 };
 
-export default ThemeContainer;
+export default React.memo(ThemeContainer);

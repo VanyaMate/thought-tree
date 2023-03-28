@@ -8,9 +8,9 @@ const Header = () => {
     const { toggleTheme } = useActions();
 
     return (
-        <ThemeContainer light={css.light} dark={css.dark} className={css.container}>
+        <ThemeContainer themeStyles={css} className={css.container}>
             Header
-            <Button onClick={toggleTheme} active>Изменить</Button>
+            <Button onClick={() => toggleTheme()} active>Изменить</Button>
         </ThemeContainer>
     );
 };

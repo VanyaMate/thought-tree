@@ -4,7 +4,7 @@ import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeCont
 
 const Bottom = () => {
     return (
-        <ThemeContainer dark={css.dark} light={css.light} className={css.container}>
+        <ThemeContainer themeStyles={css} className={css.container}>
             Bottom
         </ThemeContainer>
     );

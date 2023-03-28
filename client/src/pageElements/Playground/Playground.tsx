@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import css from './Playground.module.scss';
 import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
-import MouseScrollContainer from "../../components/MouseScrollContainer/MouseScrollContainer";
+import PlaygroundScrollContainer from "../../components/PlaygroundScrollContainer/PlaygroundScrollContainer";
+import {useMySelector} from "../../hooks/redux.hook";
 
 const Playground = () => {
-    const [draggable, setDraggable] = useState<boolean>(false);
-    const [startDragCoords, setStartDragCoords] = useState<{x: number, y: number}>({x: 0, y: 0})
+    const playground = useMySelector(state => state.playground);
+    const ref = useRef<HTMLDivElement>(null);
 
-    const onMouseDown = function (e: React.MouseEventHandler) {
-        console.log(e);
-        setDraggable(true);
-    }
-
-    const onMouseUp = function () {
-        setDraggable(false);
-    }
+    useEffect(() => {
+        if (ref.current) {
+            ref.current.scrollLeft = playground.coords.x;
+            ref.current.scrollTop = playground.coords.y;
+        }
+    }, [playground.coords])
 
     return (
-        <ThemeContainer light={css.light} dark={css.dark} className={css.container}>
-            <MouseScrollContainer/>
+        <ThemeContainer themeStyles={css} className={css.container}>
+            <div className={css.scrollContainer} ref={ref}>
+                <PlaygroundScrollContainer/>
+            </div>
         </ThemeContainer>
     );
 };

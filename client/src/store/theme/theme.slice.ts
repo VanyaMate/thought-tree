@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export enum Theme {
-    DARK,
-    LIGHT
+    DARK = 'dark',
+    LIGHT = 'light'
 }
 
 export interface ITheme {

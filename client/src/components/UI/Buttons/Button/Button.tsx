@@ -3,7 +3,7 @@ import {IDefaultComponent} from "../../../IDefaultComponent";
 import css from './Button.module.scss';
 import ThemeContainer from "../ThemeContainer/ThemeContainer";
 
-export interface IButton extends IDefaultComponent{
+export interface IButton extends IDefaultComponent {
     onClick: () => void
     active?: boolean
 }
@@ -13,8 +13,7 @@ const Button: React.FC<IButton> = (props) => {
 
     return (
         <ThemeContainer
-            light={css.light}
-            dark={css.dark}
+            themeStyles={css}
             {...other}
             className={[css.button, active ? css.active : '', className].join(' ')}
         >
@@ -23,4 +22,4 @@ const Button: React.FC<IButton> = (props) => {
     );
 };
 
-export default Button;
+export default React.memo(Button);
