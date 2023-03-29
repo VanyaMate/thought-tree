@@ -31,7 +31,7 @@ $cardWidth: 400px;
 }
 
 .cardType {
-    &.width {
+    &.blocks {
         width: 100%;
 
         .text {
@@ -39,7 +39,7 @@ $cardWidth: 400px;
         }
     }
 
-    &.parts {
+    &.three {
         width: $cardWidth;
     }
 }

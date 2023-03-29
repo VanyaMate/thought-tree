@@ -11,9 +11,9 @@ const Header = () => {
     return (
         <ColorThemeContainer themeStyles={css} className={css.container}>
             Header
-            <Button onClick={() => toggleTheme()} active>Изменить</Button>
-            <Button onClick={() => setPlaygroundTheme(PlaygroundTheme.WIDTH)} active>WidthType</Button>
-            <Button onClick={() => setPlaygroundTheme(PlaygroundTheme.PARTS)} active>PartsType</Button>
+            <Button onClick={() => toggleTheme()} active>Изменить тему сайта</Button>
+            <Button onClick={() => setPlaygroundTheme(PlaygroundTheme.BLOCKS)} active>Blocks Playground Type</Button>
+            <Button onClick={() => setPlaygroundTheme(PlaygroundTheme.THREE)} active>Three Playground Type</Button>
         </ColorThemeContainer>
     );
 };

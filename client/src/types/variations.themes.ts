@@ -5,6 +5,6 @@ export enum ColorTheme {
 
 export enum PlaygroundTheme {
     LIST = 'list',
-    WIDTH = 'width',
-    PARTS = 'parts'
+    BLOCKS = 'blocks',
+    THREE = 'three'
 }

@@ -50,7 +50,6 @@ const PlaygroundScrollContainer: React.FC<IDefaultComponent> = (props) => {
 
     const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         const target: HTMLDivElement = e.target as HTMLDivElement;
-        console.log('set playground scrolled');
 
         if (e.button === 0 && !isEntity(target)) {
             setPlaygroundScrolled(true);

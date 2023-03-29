@@ -21,7 +21,7 @@ const initialState: IPlayground = {
     currentCoords: { x: 0, y: 0 },
     mouseStartCoords: { x: 0, y: 0 },
     mouseCoords: { x: 0, y: 0 },
-    theme: PlaygroundTheme.PARTS
+    theme: PlaygroundTheme.THREE
 };
 
 export const playgroundSlice = createSlice({
