@@ -49,7 +49,7 @@ const PlaygroundContent = () => {
 
     return (
         <div className={css.content}>
-            <Entity {...data} parentCard={null}/>
+            <Entity {...data}/>
         </div>
     );
 };

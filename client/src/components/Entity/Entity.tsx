@@ -15,7 +15,7 @@ export interface IEntity {
 }
 
 export interface IEntityComponent extends IEntity {
-    parentCard: React.RefObject<HTMLDivElement>
+    parentCard?: React.RefObject<HTMLDivElement>
 }
 
 const Entity: React.FC<IEntityComponent> = (props) => {
