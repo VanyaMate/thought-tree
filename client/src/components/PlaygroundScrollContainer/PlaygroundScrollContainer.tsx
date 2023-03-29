@@ -59,7 +59,7 @@ const PlaygroundScrollContainer: React.FC<IDefaultComponent> = (props) => {
     }, [])
 
     const onMouseUp = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.button === 0 && container.current && !isEntity(e.target as HTMLDivElement)) {
+        if (e.button === 0 && container.current) {
             setPlaygroundScrolled(false);
             setPlaygroundCoords({
                 x: (container.current.parentNode as HTMLDivElement).scrollLeft,
