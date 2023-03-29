@@ -47,8 +47,6 @@ const PlaygroundContent = () => {
         ]
     }
 
-    console.log('playground content rerender');
-
     return (
         <div className={css.content}>
             <Entity {...data}/>
