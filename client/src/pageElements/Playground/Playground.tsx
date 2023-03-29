@@ -3,6 +3,7 @@ import css from './Playground.module.scss';
 import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
 import PlaygroundScrollContainer from "../../components/PlaygroundScrollContainer/PlaygroundScrollContainer";
 import {useActions, useMySelector} from "../../hooks/redux.hook";
+import PlaygroundContent from "../../components/PlaygroundContent/PlaygroundContent";
 
 const Playground = () => {
     const playground = useMySelector(state => state.playground);
@@ -28,7 +29,9 @@ const Playground = () => {
     return (
         <ThemeContainer themeStyles={css} className={css.container}>
             <div className={css.scrollContainer} ref={ref} onScroll={onScroll}>
-                <PlaygroundScrollContainer/>
+                <PlaygroundScrollContainer>
+                    <PlaygroundContent/>
+                </PlaygroundScrollContainer>
             </div>
         </ThemeContainer>
     );

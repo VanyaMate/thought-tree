@@ -1,18 +1,30 @@
 @import "src/styles/colors";
 
+$darkThemeColor: $black;
+$lightThemeColor: $white;
+
 .content {
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 150%;
-    min-height: 250%;
+    min-width: 100%;
+    min-height: 100%;
+    cursor: grab;
 
+    &.draggable {
+        cursor: grabbing;
+        user-select: none;
+    }
+    
+    & *[data-entity] {
+        cursor: auto;
+    }
 
     &.light {
-        background-color: $white;
+        background-color: $lightThemeColor;
         background-image:
-                linear-gradient($white 1px, transparent 5px),
-                linear-gradient(90deg, $white 1px, transparent 5px),
+                linear-gradient($lightThemeColor 1px, transparent 50px),
+                linear-gradient(90deg, $lightThemeColor 1px, transparent 50px),
                 linear-gradient($markBlueLight 1px, transparent 1px),
                 linear-gradient(90deg, $markBlueLight 1px, transparent 1px);
         background-size:
@@ -21,27 +33,27 @@
                 100px 100px,
                 100px 100px;
         background-position:
-                -1px -1px,
-                -1px -1px,
+                0 0,
+                0 0,
                 -1px -1px,
                 -1px -1px;
     }
 
     &.dark {
-        background-color: $darkBlack;
+        background-color: $darkThemeColor;
         background-image:
-                linear-gradient($darkBlack 1px, transparent 5px),
-                linear-gradient(90deg, $darkBlack 1px, transparent 5px),
-                linear-gradient($markBlueLight 1px, transparent 1px),
-                linear-gradient(90deg, $markBlueLight 1px, transparent 1px);
+                linear-gradient($darkThemeColor 19px, transparent 1px),
+                linear-gradient(90deg, $darkThemeColor 19px, transparent 1px),
+                linear-gradient(opacify($markBlueLight, .2) 1px, transparent 1px),
+                linear-gradient(90deg, opacify($markBlueLight, .2) 1px, transparent 1px);
         background-size:
                 20px 20px,
                 20px 20px,
                 100px 100px,
                 100px 100px;
         background-position:
-                -1px -1px,
-                -1px -1px,
+                0 0,
+                0 0,
                 -1px -1px,
                 -1px -1px;
     }
