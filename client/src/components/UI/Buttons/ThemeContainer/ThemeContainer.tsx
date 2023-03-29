@@ -3,7 +3,7 @@ import {IDefaultComponent} from "../../../IDefaultComponent";
 import {useMySelector} from "../../../../hooks/redux.hook";
 
 export interface IThemeContainer extends IDefaultComponent {
-    themeStyles: { [key: string]: string }
+    themeStyles: { [key: string]: string },
 }
 
 const ThemeContainer: React.FC<IThemeContainer> = React.forwardRef((props, ref) => {

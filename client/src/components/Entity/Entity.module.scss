@@ -1,31 +1,15 @@
 @import "src/styles/colors";
 @import "src/styles/sizes";
 
-$cardWidth: 400px;
-
 .container {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: $bigOffset;
+    margin-right: $bigOffset;
+    margin-top: $bigOffset;
 
-    &.light {
-        .card {
-            background: $lightWhite;
-            box-shadow: $defaultLightBoxShadow;
-        }
-    }
-
-    &.dark {
-        .card {
-            background: $darkBlack;
-            box-shadow: $defaultBoxShadow;
-        }
-    }
-
-    .card {
-        width: $cardWidth;
-        padding: $bigOffset;
+    &:last-child {
+        margin-right: 0;
     }
 
     .points {

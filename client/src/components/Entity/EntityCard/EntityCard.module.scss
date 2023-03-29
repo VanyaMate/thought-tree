@@ -1,0 +1,30 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+$cardWidth: 400px;
+
+.card {
+    min-width: $cardWidth;
+    width: $cardWidth;
+    padding: $bigOffset;
+
+    &.light {
+        background: $lightWhite;
+        box-shadow: $defaultLightBoxShadow;
+    }
+
+    &.dark {
+        background: $darkBlack;
+        box-shadow: $defaultBoxShadow;
+    }
+
+    .title {
+        text-transform: capitalize;
+        margin-bottom: $mediumOffset;
+        font-size: 20px;
+    }
+
+    .text {
+        // width: $cardWidth;
+    }
+}

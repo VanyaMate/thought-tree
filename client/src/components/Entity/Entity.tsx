@@ -1,8 +1,7 @@
 import React from 'react';
 import css from './Entity.module.scss';
 import ThemeContainer from "../UI/Buttons/ThemeContainer/ThemeContainer";
-import {generateString} from "../../../../utils/methods";
-import {rus} from "../../../../utils/store.words";
+import EntityCard from "./EntityCard/EntityCard";
 
 export interface IEntityData {
     title: string,
@@ -18,10 +17,7 @@ const Entity: React.FC<IEntity> = (props) => {
 
     return (
         <ThemeContainer themeStyles={css} className={css.container}>
-            <div className={css.card} data-entity={'true'}>
-                <h4>{ generateString(rus, 1, 5) }</h4>
-                <p>{ generateString(rus, 30, 250) }</p>
-            </div>
+            <EntityCard {...props.data}/>
             <div className={css.points}>
                 {
                     /**
