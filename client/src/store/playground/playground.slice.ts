@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {PlaygroundTheme} from "../../types/variations.themes";
 
 export interface IPlayground {
     scrolled: boolean,
@@ -6,6 +7,7 @@ export interface IPlayground {
     currentCoords: ICoords,
     mouseStartCoords: ICoords,
     mouseCoords: ICoords,
+    theme: PlaygroundTheme
 }
 
 export interface ICoords {
@@ -19,6 +21,7 @@ const initialState: IPlayground = {
     currentCoords: { x: 0, y: 0 },
     mouseStartCoords: { x: 0, y: 0 },
     mouseCoords: { x: 0, y: 0 },
+    theme: PlaygroundTheme.PARTS
 };
 
 export const playgroundSlice = createSlice({
@@ -48,6 +51,9 @@ export const playgroundSlice = createSlice({
         setPlaygroundScrolled (state, action: PayloadAction<boolean>) {
             state.scrolled = action.payload
         },
+        setPlaygroundTheme (state, action: PayloadAction<PlaygroundTheme>) {
+            state.theme = action.payload;
+        }
     }
 })
 

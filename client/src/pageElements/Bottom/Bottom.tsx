@@ -1,12 +1,12 @@
 import React from 'react';
 import css from './Bottom.module.scss';
-import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
+import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";
 
 const Bottom = () => {
     return (
-        <ThemeContainer themeStyles={css} className={css.container}>
+        <ColorThemeContainer themeStyles={css} className={css.container}>
             Bottom
-        </ThemeContainer>
+        </ColorThemeContainer>
     );
 };
 

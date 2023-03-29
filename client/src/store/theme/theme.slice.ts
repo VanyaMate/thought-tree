@@ -1,27 +1,23 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-export enum Theme {
-    DARK = 'dark',
-    LIGHT = 'light'
-}
+import {ColorTheme} from "../../types/variations.themes";
 
 export interface ITheme {
-    type: Theme
+    type: string
 }
 
 const initialState: ITheme = {
-    type: Theme.DARK
+    type: ColorTheme.DARK
 }
 
 export const themeSlice = createSlice({
     name: 'theme',
     initialState,
     reducers: {
-        changeTheme (state, action: PayloadAction<Theme>) {
+        changeTheme (state, action: PayloadAction<ColorTheme>) {
             state.type = action.payload;
         },
         toggleTheme (state) {
-            state.type = state.type === Theme.DARK ? Theme.LIGHT : Theme.DARK;
+            state.type = state.type === ColorTheme.DARK ? ColorTheme.LIGHT : ColorTheme.DARK;
         }
     }
 })

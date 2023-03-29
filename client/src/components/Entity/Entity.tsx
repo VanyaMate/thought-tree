@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import css from './Entity.module.scss';
-import ThemeContainer from "../UI/Buttons/ThemeContainer/ThemeContainer";
 import EntityCard from "./EntityCard/EntityCard";
+import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
 
 export interface IEntityData {
     title: string,
@@ -13,11 +13,18 @@ export interface IEntity {
     points: IEntity[]
 }
 
-const Entity: React.FC<IEntity> = (props) => {
+export interface IEntityComponent {
+    entity: IEntity,
+    parentWidth: number,
+    index: number,
+}
+
+const Entity: React.FC<IEntityComponent> = (props) => {
+    const container = useRef<HTMLDivElement>(null);
 
     return (
-        <ThemeContainer themeStyles={css} className={css.container}>
-            <EntityCard {...props.data}/>
+        <ColorThemeContainer themeStyles={css} className={css.container} ref={container}>
+            <EntityCard {...props.entity.data}/>
             <div className={css.points}>
                 {
                     /**
@@ -25,10 +32,10 @@ const Entity: React.FC<IEntity> = (props) => {
                      *  Потому что в будущем планируется добавить возможность изменять order
                      *  и чтобы предотвратить ререндер - нужно заменить index
                      * */
-                    props.points.map((point, index) => <Entity key={index} {...point}/>)
+                    props.entity.points.map((point, index) => <Entity key={index} {...point}/>)
                 }
             </div>
-        </ThemeContainer>
+        </ColorThemeContainer>
     );
 };
 

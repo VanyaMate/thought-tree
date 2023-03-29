@@ -1,17 +1,20 @@
 import React from 'react';
 import css from './Header.module.scss';
-import {useActions, useMySelector} from "../../hooks/redux.hook";
+import {useActions} from "../../hooks/redux.hook";
 import Button from "../../components/UI/Buttons/Button/Button";
-import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
+import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";
+import {PlaygroundTheme} from "../../types/variations.themes";
 
 const Header = () => {
-    const { toggleTheme } = useActions();
+    const { toggleTheme, setPlaygroundTheme } = useActions();
 
     return (
-        <ThemeContainer themeStyles={css} className={css.container}>
+        <ColorThemeContainer themeStyles={css} className={css.container}>
             Header
             <Button onClick={() => toggleTheme()} active>Изменить</Button>
-        </ThemeContainer>
+            <Button onClick={() => setPlaygroundTheme(PlaygroundTheme.WIDTH)} active>WidthType</Button>
+            <Button onClick={() => setPlaygroundTheme(PlaygroundTheme.PARTS)} active>PartsType</Button>
+        </ColorThemeContainer>
     );
 };
 

@@ -1,9 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import css from './Playground.module.scss';
-import ThemeContainer from "../../components/UI/Buttons/ThemeContainer/ThemeContainer";
+import ThemeContainer from "../../components/Themes/ThemeContainer/ThemeContainer";
 import PlaygroundScrollContainer from "../../components/PlaygroundScrollContainer/PlaygroundScrollContainer";
 import {useActions, useMySelector} from "../../hooks/redux.hook";
 import PlaygroundContent from "../../components/PlaygroundContent/PlaygroundContent";
+import {ColorTheme} from "../../types/variations.themes";
+import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";
 
 const Playground = () => {
     const playground = useMySelector(state => state.playground);
@@ -27,13 +29,13 @@ const Playground = () => {
     }
 
     return (
-        <ThemeContainer themeStyles={css} className={css.container}>
+        <ColorThemeContainer themeStyles={css} className={css.container}>
             <div className={css.scrollContainer} ref={ref} onScroll={onScroll}>
                 <PlaygroundScrollContainer>
                     <PlaygroundContent/>
                 </PlaygroundScrollContainer>
             </div>
-        </ThemeContainer>
+        </ColorThemeContainer>
     );
 };
 
