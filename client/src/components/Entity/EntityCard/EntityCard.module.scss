@@ -6,6 +6,8 @@ $cardWidth: 400px;
 .card {
     min-width: $cardWidth;
     padding: $bigOffset;
+    position: relative;
+    z-index: 2;
 
     &.light {
         background: $lightWhite;

@@ -2,6 +2,7 @@
 @import "src/styles/sizes";
 
 .container {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;

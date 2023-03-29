@@ -1,7 +1,8 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import css from './Entity.module.scss';
 import EntityCard from "./EntityCard/EntityCard";
 import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
+import EntityLine from "./EntityLine/EntityLine";
 
 export interface IEntityData {
     title: string,
@@ -13,17 +14,28 @@ export interface IEntity {
     points: IEntity[]
 }
 
-export interface IEntityComponent {
-    entity: IEntity,
-    parentCard: HTMLDivElement | null
+export interface IEntityComponent extends IEntity {
+    parentCard: React.RefObject<HTMLDivElement>
 }
 
 const Entity: React.FC<IEntityComponent> = (props) => {
     const card = useRef<HTMLDivElement>(null);
+    const [width, setWidth] = useState(0);
+
+    useEffect(() => {
+        if (card.current && props.parentCard?.current) {
+            const cardPosition = card.current.getBoundingClientRect();
+            const parentCardPosition = props.parentCard.current.getBoundingClientRect();
+            const xDelta = cardPosition.left - parentCardPosition.left;
+
+            setWidth(xDelta);
+        }
+    }, [])
 
     return (
-        <ColorThemeContainer themeStyles={css} className={css.container} ref={card}>
-            <EntityCard {...props.entity.data}/>
+        <ColorThemeContainer themeStyles={css} className={css.container}>
+            <EntityLine width={width}/>
+            <EntityCard {...props.data} ref={card}/>
             <div className={css.points}>
                 {
                     /**
@@ -31,11 +43,11 @@ const Entity: React.FC<IEntityComponent> = (props) => {
                      *  Потому что в будущем планируется добавить возможность изменять order
                      *  и чтобы предотвратить ререндер - нужно заменить index
                      * */
-                    props.entity.points.map((point, index) => <Entity key={index} entity={point} parentCard={card.current}/>)
+                    props.points.map((point, index) => <Entity key={index} {...point} parentCard={card}/>)
                 }
             </div>
         </ColorThemeContainer>
     );
 };
 
-export default Entity;
+export default React.memo(Entity);

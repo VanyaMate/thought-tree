@@ -7,12 +7,12 @@ export interface IPlaygroundThemeContainer extends IDefaultComponent {
     themeStyles: { [key: string]: string },
 }
 
-const PlaygroundThemeContainer: React.FC<IPlaygroundThemeContainer> = (props) => {
+const PlaygroundThemeContainer: React.FC<IPlaygroundThemeContainer> = React.forwardRef((props, ref) => {
     const playground = useMySelector((state) => state.playground);
 
     return (
-        <ThemeContainer {...props} theme={{ type: playground.theme }}/>
+        <ThemeContainer {...props} theme={{ type: playground.theme }} ref={ref}/>
     );
-};
+});
 
-export default PlaygroundThemeContainer;
+export default React.memo(PlaygroundThemeContainer);

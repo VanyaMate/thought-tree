@@ -1,0 +1,22 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    height: 50px;
+    border: 2px solid transparent;
+    position: absolute;
+    z-index: 1;
+    border-top: 2px solid $markBlueLight;
+
+    &.left {
+        border-left: 2px solid $markBlueLight;
+        left: 50%;
+        bottom: 100%;
+    }
+
+    &.right {
+        border-right: 2px solid $markBlueLight;
+        right: 50%;
+        bottom: 100%;
+    }
+}
