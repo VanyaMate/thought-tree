@@ -7,7 +7,8 @@ export interface IPlayground {
     currentCoords: ICoords,
     mouseStartCoords: ICoords,
     mouseCoords: ICoords,
-    theme: PlaygroundTheme
+    theme: PlaygroundTheme,
+    scrolledEntityId: string,
 }
 
 export interface ICoords {
@@ -21,7 +22,8 @@ const initialState: IPlayground = {
     currentCoords: { x: 0, y: 0 },
     mouseStartCoords: { x: 0, y: 0 },
     mouseCoords: { x: 0, y: 0 },
-    theme: PlaygroundTheme.THREE
+    theme: PlaygroundTheme.THREE,
+    scrolledEntityId: ''
 };
 
 export const playgroundSlice = createSlice({
@@ -53,6 +55,9 @@ export const playgroundSlice = createSlice({
         },
         setPlaygroundTheme (state, action: PayloadAction<PlaygroundTheme>) {
             state.theme = action.payload;
+        },
+        setPlaygroundScrolledEntityId (state, action: PayloadAction<string>) {
+            state.scrolledEntityId = action.payload;
         }
     }
 })

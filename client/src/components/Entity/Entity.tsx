@@ -5,6 +5,7 @@ import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContain
 import EntityLine from "./EntityLine/EntityLine";
 
 export interface IEntityData {
+    id: string,
     title: string,
     text: string
 }
@@ -15,7 +16,9 @@ export interface IEntity {
 }
 
 export interface IEntityComponent extends IEntity {
-    parentCard?: React.RefObject<HTMLDivElement>
+    parentCard?: React.RefObject<HTMLDivElement>,
+    parentData?: IEntityData,
+    root?: boolean
 }
 
 const Entity: React.FC<IEntityComponent> = (props) => {
@@ -35,7 +38,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
     return (
         <ColorThemeContainer themeStyles={css} className={css.container}>
             <EntityLine width={width}/>
-            <EntityCard {...props.data} ref={card}/>
+            <EntityCard {...props} ref={card} parentEntity={props.parentData} root={props.root}/>
             <div className={css.points}>
                 {
                     /**
@@ -43,7 +46,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
                      *  Потому что в будущем планируется добавить возможность изменять order
                      *  и чтобы предотвратить ререндер - нужно заменить index
                      * */
-                    props.points.map((point, index) => <Entity key={index} {...point} parentCard={card}/>)
+                    props.points.map((point, index) => <Entity key={index} {...point} parentCard={card} parentData={props.data}/>)
                 }
             </div>
         </ColorThemeContainer>

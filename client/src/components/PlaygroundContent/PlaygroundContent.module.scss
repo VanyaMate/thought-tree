@@ -1,3 +1,5 @@
-.content {
+@import "src/styles/sizes";
 
+.content {
+    padding: $bigOffset;
 }

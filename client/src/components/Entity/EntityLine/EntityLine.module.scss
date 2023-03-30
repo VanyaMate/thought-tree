@@ -1,22 +1,27 @@
 @import "src/styles/colors";
 @import "src/styles/sizes";
 
+$markHeight: 70px;
+$borderSize: 3px;
+$borderRadius: 10px;
+
 .container {
-    height: 50px;
-    border: 2px solid transparent;
-    border-top: 2px solid $markBlueLight;
+    height: $markHeight;
+    border: $borderSize dotted transparent;
+    border-top-color: $markBlueLight;
     position: absolute;
+    bottom: calc(100% - #{$borderSize});
     z-index: 1;
 
     &.left {
-        border-left: 2px solid $markBlueLight;
+        border-left-color: $markBlueLight;
+        border-radius: $borderRadius 0 0 0;
         left: 50%;
-        bottom: 100%;
     }
 
     &.right {
-        border-right: 2px solid $markBlueLight;
+        border-right-color: $markBlueLight;
+        border-radius: 0 $borderRadius 0 0;
         right: 50%;
-        bottom: 100%;
     }
 }
