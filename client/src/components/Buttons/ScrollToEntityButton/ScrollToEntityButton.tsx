@@ -3,6 +3,7 @@ import {IDefaultComponent} from "../../IDefaultComponent";
 import Button from "../../UI/Buttons/Button/Button";
 import {IEntityData} from "../../Entity/Entity";
 import {useLocation, useNavigate} from "react-router-dom";
+import {getUUID} from "../../../../../utils/methods";
 
 export interface IScrollToEntityButton extends IDefaultComponent {
     entity: {
@@ -15,7 +16,8 @@ const ScrollToEntityButton: React.FC<IScrollToEntityButton> = (props) => {
     const navigation = useNavigate();
 
     const scrollHandler = useCallback(() => {
-        navigation(`${location.pathname}#${props.entity.data!.id}`)
+        console.log(props.entity.data);
+        navigation(`${location.pathname}#${props.entity.data!.id}-${getUUID(5)}`)
     }, [props.entity.data])
 
     if (!props.entity.data) {

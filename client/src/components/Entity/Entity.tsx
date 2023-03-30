@@ -41,12 +41,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
             <EntityCard {...props} ref={card} parentEntity={props.parentData} root={props.root}/>
             <div className={css.points}>
                 {
-                    /**
-                     *  TODO: Заменить index на point.id после создания DB
-                     *  Потому что в будущем планируется добавить возможность изменять order
-                     *  и чтобы предотвратить ререндер - нужно заменить index
-                     * */
-                    props.points.map((point, index) => <Entity key={index} {...point} parentCard={card} parentData={props.data}/>)
+                    props.points.map((point) => <Entity key={point.data.id} {...point} parentCard={card} parentData={props.data}/>)
                 }
             </div>
         </ColorThemeContainer>

@@ -8,7 +8,7 @@ const PlaygroundContent = () => {
     const { hash } = useLocation();
 
     useEffect(() => {
-        const entity = document.querySelector(`${hash || 'noelementselector'}`);
+        const entity = document.querySelector(`${hash.split('-')[0] || 'noelementselector'}`);
         if (entity) {
             setTimeout(() => {
                 entity.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });

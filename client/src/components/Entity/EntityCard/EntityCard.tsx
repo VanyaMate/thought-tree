@@ -23,7 +23,7 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef((props, ref) => {
                 <h4 className={css.title}>{ props.data.title + generateString(rus, 1, 5) }</h4>
                 <p className={css.text}>{ generateString(rus, 30, 250) }</p>
                 {
-                    props.points.map((point) => <ScrollToEntityButton entity={{ data: point.data }}/>)
+                    props.points.map((point) => <ScrollToEntityButton key={point.data.id} entity={{ data: point.data }}/>)
                 }
             </ColorThemeContainer>
         </PlaygroundThemeContainer>
