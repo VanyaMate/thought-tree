@@ -1,0 +1,21 @@
+@import "src/styles/sizes";
+@import "src/styles/colors";
+
+.container {
+    width: 400px;
+    padding: $bigOffset;
+    position: absolute;
+    top: $bigOffset;
+    left: $bigOffset;
+    z-index: 2;
+
+    &.dark {
+        background: $darkBlack;
+        color: $white;
+    }
+
+    &.light {
+        background: $white;
+        color: $darkBlack;
+    }
+}

@@ -13,7 +13,7 @@ export interface IEntityCard extends IEntity {
     parentEntity?: IEntityData
 }
 
-const EntityCard: React.FC<IEntityCard> = React.forwardRef((props, ref) => {
+const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEntityCard>((props, ref) => {
     const parentData = props.parentEntity || null;
 
     return (

@@ -3,6 +3,7 @@ import css from './PlaygroundContent.module.scss';
 import Entity from "../Entity/Entity";
 import {data} from "./_tempo_data";
 import {useLocation} from 'react-router-dom'
+import CreateEntity from "../CreateEntity/CreateEntity";
 
 const PlaygroundContent = () => {
     const { hash } = useLocation();
@@ -21,6 +22,9 @@ const PlaygroundContent = () => {
         }
     }, [hash])
 
+    /**
+     * TODO: Убрать этот временный код
+     */
     const str = 'test string (&){"title": "component1"}(&) some string (&){"title": "component2"}(&)';
     const regex = /\(&\)(.*?)\(&\)/g;
     const texts: string[] = str.split(regex);
@@ -39,9 +43,7 @@ const PlaygroundContent = () => {
     // <Entity {...data} root/>
     return (
         <div className={css.content}>
-            {
-                result
-            }
+            <CreateEntity/>
         </div>
     );
 };
