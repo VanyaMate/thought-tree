@@ -31,3 +31,22 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef((props, ref) => {
 });
 
 export default React.memo(EntityCard);
+
+
+/**
+ *
+ * {-{"id": string, "text": string, "type": string, data: any}-}
+ * {-{id}-}
+ *
+ *
+ */
+
+
+
+
+
+
+
+
+
+
