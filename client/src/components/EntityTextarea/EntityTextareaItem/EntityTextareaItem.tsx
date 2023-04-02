@@ -3,27 +3,20 @@ import css from './EntityTextareaItem.module.scss';
 
 export interface IEntityTextareaItem {
     value: string,
-
 }
 
 const EntityTextareaItem: React.FC<IEntityTextareaItem> = (props) => {
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const [text, setText] = useState<string>('');
-    const autoResize = function () {
-        if (textareaRef.current) {
-            textareaRef.current!.style.height = textareaRef.current!.rows * 10 + 'px';
-            textareaRef.current!.style.width = textareaRef.current!.cols * 3 + 'px';
-        }
-    }
-
-    useEffect(() => {
-        autoResize();
-    }, [text])
+    const textareaRef = useRef<HTMLDivElement>(null);
 
     return (
-        <textarea className={css.container} ref={textareaRef}>
+        <div
+            contentEditable={true}
+            suppressContentEditableWarning={true}
+            className={css.container}
+            ref={textareaRef}
+        >
             { props.value }
-        </textarea>
+        </div>
     );
 };
 
