@@ -18,7 +18,7 @@ export const useEntityTextareaHook = function (value: string): ReactElement[] {
             try {
                 const json = JSON.parse(texts[i]);
 
-                switch (json.type) {
+                switch (Number(json.type)) {
                     case EntityTextareaComponent.COLOR:
                         results[i] = <EntityTextareaColor key={i} {...json}/>;
                         break

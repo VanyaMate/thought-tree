@@ -1,5 +1,5 @@
 import React, {ReactElement} from 'react';
-import css from './ EntityTextareColor.module.scss';
+import css from './EntityTextareColor.module.scss';
 import {useEntityTextareaHook} from "../../../hooks/useEntityTextarea.hook";
 import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 import {IDefaultComponent} from "../../IDefaultComponent";

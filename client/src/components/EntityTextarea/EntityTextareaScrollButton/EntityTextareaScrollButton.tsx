@@ -8,7 +8,10 @@ import {EntityTextareaComponent} from "../../../types/entityTextareaComponent";
 
 export interface IEntityTextareaScrollButton extends IDefaultComponent {
     value: string,
-    entityId: string
+    entityId: string,
+    data: {
+        entityId: string
+    }
 }
 
 const EntityTextareaScrollButton: React.FC<IEntityTextareaScrollButton> = (props) => {
@@ -19,8 +22,9 @@ const EntityTextareaScrollButton: React.FC<IEntityTextareaScrollButton> = (props
             themeStyles={css}
             className={[css.container, props.className ?? ''].join(' ')}
             data-entity-type={EntityTextareaComponent.SCROLL_BUTTON}
+            data-entity-data={`{"entityId": "${props.data.entityId}"}`}
         >
-            <ScrollToEntityButton entityId={props.entityId}>
+            <ScrollToEntityButton entityId={props.data.entityId}>
                 { result }
             </ScrollToEntityButton>
         </ColorThemeContainer>
