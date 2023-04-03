@@ -1,10 +1,12 @@
+@import "src/styles/colors";
+
 .container {
     display: inline;
 
     &.light {
-
+        color: $darkBlack;
     }
     &.dark {
-
+        color: $white;
     }
 }

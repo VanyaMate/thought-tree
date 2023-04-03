@@ -1,19 +1,52 @@
 @import "src/styles/sizes";
 @import "src/styles/colors";
 
+$darkThemeColor: $black;
+$lightThemeColor: $white;
+
 .container {
     width: 100vw;
     height: calc(100vh - #{$mediumHeight} - #{$smallHeight});
     overflow: hidden;
     position: relative;
 
-    &.dark {
-        background: $black;
-        color: $white;
+    &.light {
+        color: $darkThemeColor;
+        background-color: $lightThemeColor;
+        background-image:
+                linear-gradient($lightThemeColor 1px, transparent 50px),
+                linear-gradient(90deg, $lightThemeColor 1px, transparent 50px),
+                linear-gradient($markBlueLight 1px, transparent 1px),
+                linear-gradient(90deg, $markBlueLight 1px, transparent 1px);
+        background-size:
+                20px 20px,
+                20px 20px,
+                100px 100px,
+                100px 100px;
+        background-position:
+                0 0,
+                0 0,
+                -1px -1px,
+                -1px -1px;
     }
 
-    &.light {
-        background: $lightWhite;
-        color: $darkBlack;
+    &.dark {
+        color: $lightThemeColor;
+        background-color: $darkThemeColor;
+        background-image:
+                linear-gradient($darkThemeColor 19px, transparent 1px),
+                linear-gradient(90deg, $darkThemeColor 19px, transparent 1px),
+                linear-gradient(opacify($markBlueLight, .2) 1px, transparent 1px),
+                linear-gradient(90deg, opacify($markBlueLight, .2) 1px, transparent 1px);
+        background-size:
+                20px 20px,
+                20px 20px,
+                100px 100px,
+                100px 100px;
+        background-position:
+                0 0,
+                0 0,
+                -1px -1px,
+                -1px -1px;
     }
 }
