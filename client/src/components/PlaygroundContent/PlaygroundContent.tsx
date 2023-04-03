@@ -3,7 +3,6 @@ import css from './PlaygroundContent.module.scss';
 import Entity from "../Entity/Entity";
 import {data} from "./_tempo_data";
 import {useLocation} from 'react-router-dom'
-import CreateEntity from "../CreateEntity/CreateEntity";
 
 const PlaygroundContent = () => {
     const { hash } = useLocation();
@@ -40,10 +39,11 @@ const PlaygroundContent = () => {
         }
     }
 
-    // <Entity {...data} root/>
+    // <EntityPage {...data} root/>
+    // <CreateEntity/>
     return (
         <div className={css.content}>
-            <CreateEntity/>
+            <Entity {...data} root/>
         </div>
     );
 };

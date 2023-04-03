@@ -1,0 +1,37 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.button {
+    display: inline-flex;
+    pointer-events: none;
+    user-select: none;
+    opacity: .8;
+
+    width: $mediumSmallHeight;
+    height: $mediumSmallHeight;
+    transition: .05s;
+
+    border: 1px solid transparent;
+    border-radius: $smallOffset;
+
+    justify-content: center;
+    align-items: center;
+
+    &.active {
+        cursor: pointer;
+        pointer-events: auto;
+        opacity: 1;
+    }
+
+    &.light {
+        background: $white;
+        color: $darkBlack;
+        border: 1px solid $markBlueLight;
+    }
+
+    &.dark {
+        background: $markBlueLight;
+        color: $white;
+        border: 1px solid $markBlueLight;
+    }
+}

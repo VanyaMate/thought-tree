@@ -4,6 +4,8 @@ import PlaygroundScrollContainer from "../../components/PlaygroundScrollContaine
 import {useActions, useMySelector} from "../../hooks/redux.hook";
 import PlaygroundContent from "../../components/PlaygroundContent/PlaygroundContent";
 import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";
+import PlaygroundContentControl
+    from "../../components/PlaygroundContent/PlaygroundContentControl/PlaygroundContentControl";
 
 const Playground = () => {
     const playground = useMySelector(state => state.playground);
@@ -28,6 +30,7 @@ const Playground = () => {
 
     return (
         <ColorThemeContainer themeStyles={css} className={css.container}>
+            <PlaygroundContentControl/>
             <div className={css.scrollContainer} ref={ref} onScroll={onScroll}>
                 <PlaygroundScrollContainer>
                     <PlaygroundContent/>

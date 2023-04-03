@@ -5,6 +5,7 @@
     width: 100vw;
     height: calc(100vh - #{$mediumHeight} - #{$smallHeight});
     overflow: hidden;
+    position: relative;
 
     .scrollContainer {
         position: relative;

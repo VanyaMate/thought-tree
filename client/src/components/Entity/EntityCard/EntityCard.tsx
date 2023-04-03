@@ -6,6 +6,7 @@ import {IEntity, IEntityData} from "../Entity";
 import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 import PlaygroundThemeContainer from "../../Themes/PlaygroundThemeContainer/PlaygroundThemeContainer";
 import ScrollToEntityButton from "../../Buttons/ScrollToEntityButton/ScrollToEntityButton";
+import EntityTextarea from "../../EntityTextarea/EntityTextarea";
 
 export interface IEntityCard extends IEntity {
     ref?: any,
@@ -19,11 +20,11 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={props.data.id} data-root-entity={props.root ?? 'false'}>
             <ColorThemeContainer themeStyles={css} className={css.card}>
-                <ScrollToEntityButton entityId={parentData?.id || ''}/>
+                <ScrollToEntityButton entityId={parentData?.id || ''}>{parentData?.title}</ScrollToEntityButton>
                 <h4 className={css.title}>{ props.data.title + generateString(rus, 1, 5) }</h4>
-                <p className={css.text}>{ generateString(rus, 30, 250) }</p>
+                <EntityTextarea className={css.text} value={generateString(rus, 30, 250)}/>
                 {
-                    props.points.map((point) => <ScrollToEntityButton key={point.data.id} entityId={point.data.id}/>)
+                    props.points.map((point) => <ScrollToEntityButton key={point.data.id} entityId={point.data.id}>{point.data.title}</ScrollToEntityButton>)
                 }
             </ColorThemeContainer>
         </PlaygroundThemeContainer>

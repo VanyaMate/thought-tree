@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IEntity} from "../../components/Entity/Entity";
 
 export interface IEntities {
@@ -17,7 +17,9 @@ export const entitiesSlice = createSlice({
     name: 'entities',
     initialState,
     reducers: {
-
+        setEntitiesRedactMode: (state, action: PayloadAction<boolean>) => {
+            state.redactMode = action.payload;
+        },
     }
 })
 

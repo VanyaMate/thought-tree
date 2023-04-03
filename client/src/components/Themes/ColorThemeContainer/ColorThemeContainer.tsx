@@ -7,7 +7,7 @@ export interface IColorThemeContainer extends IDefaultComponent {
     themeStyles: { [key: string]: string },
 }
 
-const ColorThemeContainer: React.FC<IColorThemeContainer> = React.forwardRef((props, ref) => {
+const ColorThemeContainer: React.FC<IColorThemeContainer> = React.forwardRef<HTMLDivElement, IColorThemeContainer>((props, ref) => {
     const theme = useMySelector((state) => state.theme);
 
     return (
