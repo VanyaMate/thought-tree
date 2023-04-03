@@ -3,10 +3,12 @@ import {StoreType} from "../store/index.store";
 import {bindActionCreators} from "@reduxjs/toolkit";
 import {themeSliceActions} from "../store/theme/theme.slice";
 import {playgroundActions} from "../store/playground/playground.slice";
+import {entitiesActions} from "../store/entities/entities.slice";
 
 const actions = {
     ...themeSliceActions,
     ...playgroundActions,
+    ...entitiesActions,
 }
 
 export const useMySelector: TypedUseSelectorHook<StoreType> = useSelector;

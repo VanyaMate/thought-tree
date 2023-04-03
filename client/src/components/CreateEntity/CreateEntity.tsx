@@ -14,7 +14,7 @@ const CreateEntity = () => {
     const text = `text start (&-)${component}(-&) text end`;
 
     const test_text = `text start (&-){"value":"component (&-){\\"value\\":\\"inside (&-){\\\\\\"value\\\\\\":\\\\\\"last\\\\\\",\\\\\\"type\\\\\\":\\\\\\"2\\\\\\",\\\\\\"data\\\\\\":{\\\\\\"entityId\\\\\\":\\\\\\"uid3\\\\\\"}}(-&)\\",\\"type\\":\\"3\\",\\"data\\":null}(-&)","type":"0","data":null}(-&) text end`;
-    const test_text2 = `text start (&-){"value":"comp(&-){\\"value\\": \\"string\\", \\"type\\": \\"2\\", \\"data\\": {\\"entityId\\": \\"id4\\"} }(-&)onasd ent (&-){\\"value\\":\\"inside (&-){\\\\\\"value\\\\\\":\\\\\\"last\\\\\\",\\\\\\"type\\\\\\":\\\\\\"2\\\\\\",\\\\\\"data\\\\\\":{\\\\\\"entityId\\\\\\":\\\\\\"uid3\\\\\\"}}(-&)\\",\\"type\\":\\"3\\",\\"data\\":null}(-&)","type":"0","data":null}(-&) text end`;
+    const test_text2 = `text start (&-){"value":"comp(&-){\\"value\\":\\"string\\",\\"type\\":\\"2\\",\\"data\\":{\\"entityId\\":\\"id4\\"}}(-&)onasd ent (&-){\\"value\\":\\"inside (&-){\\\\\\"value\\\\\\":\\\\\\"last\\\\\\",\\\\\\"type\\\\\\":\\\\\\"2\\\\\\",\\\\\\"data\\\\\\":{\\\\\\"entityId\\\\\\":\\\\\\"uid3\\\\\\"}}(-&)\\",\\"type\\":\\"3\\",\\"data\\":null}(-&)","type":"0","data":null}(-&) text end`;
 
     const entityTextarea = useRef<HTMLDivElement>(null)
 

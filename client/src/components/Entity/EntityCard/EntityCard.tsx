@@ -19,11 +19,11 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={props.data.id} data-root-entity={props.root ?? 'false'}>
             <ColorThemeContainer themeStyles={css} className={css.card}>
-                <ScrollToEntityButton entity={{ data: parentData }}/>
+                <ScrollToEntityButton entityId={parentData?.id || ''}/>
                 <h4 className={css.title}>{ props.data.title + generateString(rus, 1, 5) }</h4>
                 <p className={css.text}>{ generateString(rus, 30, 250) }</p>
                 {
-                    props.points.map((point) => <ScrollToEntityButton key={point.data.id} entity={{ data: point.data }}/>)
+                    props.points.map((point) => <ScrollToEntityButton key={point.data.id} entityId={point.data.id}/>)
                 }
             </ColorThemeContainer>
         </PlaygroundThemeContainer>

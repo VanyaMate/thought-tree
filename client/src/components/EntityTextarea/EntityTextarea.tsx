@@ -1,4 +1,4 @@
-import React, {ReactElement, useMemo, useState} from 'react';
+import React, {ReactElement} from 'react';
 import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
 import css from './EntityTextarea.module.scss';
 import {IDefaultComponent} from "../IDefaultComponent";
