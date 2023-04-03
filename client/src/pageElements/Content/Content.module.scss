@@ -1,0 +1,19 @@
+@import "src/styles/sizes";
+@import "src/styles/colors";
+
+.container {
+    width: 100vw;
+    height: calc(100vh - #{$mediumHeight} - #{$smallHeight});
+    overflow: hidden;
+    position: relative;
+
+    &.dark {
+        background: $black;
+        color: $white;
+    }
+
+    &.light {
+        background: $lightWhite;
+        color: $darkBlack;
+    }
+}
