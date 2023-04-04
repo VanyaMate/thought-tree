@@ -15,20 +15,40 @@ export class EntityPointService {
     async create (entityDto: CreateEntityPointDto, authToken: string) {
         try {
             const [_, token] = authToken.split(' ');
-            const userData = this.jwtService.decode(token) as { login: string };
-            const user = await this.userService.getByLogin(userData.login);
-
-            const entity = await this.entityRepository.create({...entityDto}, { include: User })
+            const userData = this.jwtService.decode(token) as { id: number };
+            const entity = await this.entityRepository.create({...entityDto, authorId: userData.id, parentId: entityDto.parentId ?? 0})
 
             return entity;
         }
         catch (e) {
+            console.log(e);
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
         }
     }
 
     async getById(id: number) {
+        const entity = await this.entityRepository.findOne({ where: {id}, include: { all: true } })
+        return entity;
+    }
 
+    /**
+     * TODO: Доделать
+     * @param id
+     * @param tree
+     */
+    async getTreeById(id: number, tree: any = {}) {
+        const entity = await this.getById(id);
+
+        tree.data = entity;
+        tree.data.points = entity.points;
+
+        const points = await Promise.all(tree.data.points.map((point) => {
+            return this.getTreeById(point.id, point);
+        }));
+
+        tree.data.points = points;
+
+        return tree;
     }
 
 }

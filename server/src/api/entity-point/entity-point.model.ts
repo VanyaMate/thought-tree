@@ -1,12 +1,12 @@
-import {Column, DataType, ForeignKey, HasMany, HasOne, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table} from "sequelize-typescript";
 import {User} from "../user/user.model";
 
 export interface IEntityPointCreationData {
-    author: User,
-    parent: EntityPoint | null,
+    authorId: number,
+    parentId: number | null,
     title: string,
     text: string,
-    points: EntityPoint[]
+    pointsIds: number[]
 }
 
 @Table({
@@ -18,16 +18,28 @@ export class EntityPoint extends Model<EntityPoint, IEntityPointCreationData> {
     id: number;
 
     @ForeignKey(() => User)
-    author: User;
+    @Column({ type: DataType.INTEGER, allowNull: false })
+    authorId: number;
 
     @ForeignKey(() => EntityPoint)
-    parent: EntityPoint | null;
+    @Column({ type: DataType.NUMBER, allowNull: false })
+    parentId: number;
+
+    @ForeignKey(() => EntityPoint)
+    @Column({ type: DataType.ARRAY(DataType.INTEGER) })
+    pointsIds: number[]
 
     @Column({ type: DataType.STRING, allowNull: false })
     title: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
     text: string;
+
+    @BelongsTo(() => User)
+    author: User;
+
+    @BelongsTo(() => EntityPoint)
+    parent: EntityPoint;
 
     @HasMany(() => EntityPoint)
     points: EntityPoint[]

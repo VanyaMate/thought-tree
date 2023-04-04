@@ -11,12 +11,17 @@ export class EntityPointController {
     @Post('/create')
     @UseGuards(JwtAuthGuard)
     create (@Body() entityDto: CreateEntityPointDto, @Headers('authorization') authToken: string) {
-        this.entityService.create(entityDto, authToken);
+        return this.entityService.create(entityDto, authToken);
     }
 
     @Get('/getById/:id')
-    getById (@Param() param: { id: string }) {
-        return param.id;
+    getById (@Param() param: { id: number }) {
+        return this.entityService.getById(param.id);
+    }
+
+    @Get('/getTreeById/:id')
+    getTreeById(@Param() param: { id: number }) {
+        return this.entityService.getTreeById(param.id);
     }
 
 }

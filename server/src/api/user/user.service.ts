@@ -13,12 +13,12 @@ export class UserService {
     }
 
     async getByLogin (login: string) {
-        const user = await this.userRepository.findOne({ where: {login}});
+        const user = await this.userRepository.findOne({ where: {login}, include: { all: true } });
         return user;
     }
 
     async getAll () {
-        const users = await this.userRepository.findAll();
+        const users = await this.userRepository.findAll({ include: { all: true }});
         return users;
     }
 
