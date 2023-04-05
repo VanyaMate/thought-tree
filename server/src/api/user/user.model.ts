@@ -12,7 +12,6 @@ export interface IUserCreationData {
 })
 export class User extends Model<User, IUserCreationData> {
 
-    @ForeignKey(() => EntityPoint)
     @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
     id: number;
 
@@ -21,9 +20,6 @@ export class User extends Model<User, IUserCreationData> {
 
     @Column({ type: DataType.STRING, allowNull: false })
     password: string;
-
-    @HasMany(() => Tree)
-    trees: Tree[]
 
     @HasMany(() => EntityPoint)
     entities: EntityPoint[]

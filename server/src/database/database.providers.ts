@@ -3,6 +3,7 @@ import {ConfigService} from "@nestjs/config";
 import {User} from "../api/user/user.model";
 import {Tree} from "../api/tree/tree.model";
 import {EntityPoint} from "../api/entity-point/entity-point.model";
+import {EntityToEntity} from "../api/entity-point/entity-to-entity.model";
 
 export const databaseProviders = [
     {
@@ -15,9 +16,9 @@ export const databaseProviders = [
                 username: config.get<string>('DB_POSTGRES_USER_NAME'),
                 password: config.get<string>('DB_POSTGRES_PASSWORD'),
                 database: config.get<string>('DB_POSTGRES_DATABASE'),
-                logging: false
+                logging: false,
             });
-            sequelize.addModels([User, Tree, EntityPoint]);
+            sequelize.addModels([User, EntityPoint, EntityToEntity]);
             await sequelize.sync();
             return sequelize;
         },
