@@ -18,6 +18,14 @@ export class EntityPointService {
             const userData = this.jwtService.decode(token) as { id: number };
             const entity = await this.entityRepository.create({...entityDto, authorId: userData.id, parentId: entityDto.parentId ?? 0})
 
+            if (entityDto.parentId) {
+                const parent = await this.entityRepository.findByPk(entityDto.parentId);
+                if (parent) {
+                    parent.pointsIds.push(entity.id);
+                    await parent.update("pointsIds", parent.pointsIds);
+                }
+            }
+
             return entity;
         }
         catch (e) {
@@ -26,9 +34,60 @@ export class EntityPointService {
         }
     }
 
+    async delete (id: number, authToken: string) {
+        try {
+            const [_, token] = authToken.split(' ');
+            const userData = this.jwtService.decode(token) as { id: number };
+            const entity = await this.entityRepository.findByPk(id);
+
+            if (entity && (entity.authorId === userData.id)) {
+                if (entity.parentId) {
+                    const parent = await this.entityRepository.findByPk(entity.parentId);
+                    await parent.update('pointsIds', parent.pointsIds.filter((id) => id !== entity.id))
+                }
+
+                if (entity.pointsIds) {
+                    await Promise.all(entity.pointsIds.map(async (id) => {
+                        const child = await this.entityRepository.findByPk(id);
+                        await child.update('parentId', 0);
+                    }))
+                }
+
+                await entity.destroy();
+                return true;
+            }
+
+            throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
+        }
+        catch (e) {
+            throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    async getAll () {
+        try {
+            return await this.entityRepository.findAll({
+                attributes: ['id', 'title', 'text', 'pointsIds'],
+                include: [
+                    { model: User, attributes: ['id', 'login'] },
+                    { model: EntityPoint, attributes: ['id', 'title']}
+                ]
+            })
+        }
+        catch (e) {
+            throw new HttpException('Ошибка сервера', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     async getById(id: number) {
-        const entity = await this.entityRepository.findOne({ where: {id}, include: { all: true } })
-        return entity;
+        return await this.entityRepository.findOne({
+            where: {id},
+            attributes: ['id', 'title', 'text', 'pointsIds'],
+            include: [
+                { model: User, attributes: ['login'] },
+                { model: EntityPoint, attributes: ['id', 'title', 'text', 'pointsIds'] }
+            ]
+        })
     }
 
     /**
@@ -40,13 +99,7 @@ export class EntityPointService {
         const entity = await this.getById(id);
 
         tree.data = entity;
-        tree.data.points = entity.points;
-
-        const points = await Promise.all(tree.data.points.map((point) => {
-            return this.getTreeById(point.id, point);
-        }));
-
-        tree.data.points = points;
+        //tree.points = await Promise.all(entity.points.map((point) => this.getTreeById(point.id)))
 
         return tree;
     }

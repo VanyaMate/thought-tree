@@ -14,6 +14,17 @@ export class EntityPointController {
         return this.entityService.create(entityDto, authToken);
     }
 
+    @Post('/delete/:id')
+    @UseGuards(JwtAuthGuard)
+    delete (@Param() param: { id: number }, @Headers('authorization') authToken: string) {
+        return this.entityService.delete(param.id, authToken);
+    }
+
+    @Get('/all')
+    getAll() {
+        return this.entityService.getAll();
+    }
+
     @Get('/getById/:id')
     getById (@Param() param: { id: number }) {
         return this.entityService.getById(param.id);

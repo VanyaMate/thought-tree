@@ -14,7 +14,8 @@ export const databaseProviders = [
                 port: config.get<number>('DB_POSTGRES_PORT'),
                 username: config.get<string>('DB_POSTGRES_USER_NAME'),
                 password: config.get<string>('DB_POSTGRES_PASSWORD'),
-                database: config.get<string>('DB_POSTGRES_DATABASE')
+                database: config.get<string>('DB_POSTGRES_DATABASE'),
+                logging: false
             });
             sequelize.addModels([User, Tree, EntityPoint]);
             await sequelize.sync();

@@ -41,7 +41,4 @@ export class EntityPoint extends Model<EntityPoint, IEntityPointCreationData> {
     @BelongsTo(() => EntityPoint)
     parent: EntityPoint;
 
-    @HasMany(() => EntityPoint)
-    points: EntityPoint[]
-
 }
