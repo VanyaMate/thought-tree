@@ -1,10 +1,11 @@
 import React from 'react';
+import ContentSize from "../../pageElements/Content/ContentSize/ContentSize";
 
 const Page404 = () => {
     return (
-        <div>
+        <ContentSize>
             404
-        </div>
+        </ContentSize>
     );
 };
 

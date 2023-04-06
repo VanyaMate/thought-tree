@@ -12,6 +12,11 @@ $lightThemeColor: $white;
     display: flex;
     justify-content: center;
 
+    .content {
+        width: $contentWidth;
+        margin: $mediumOffset;
+    }
+
     &.light {
         color: $darkThemeColor;
         background-color: $lightThemeColor;

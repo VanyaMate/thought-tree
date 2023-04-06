@@ -13,6 +13,7 @@
 
     .content {
         width: $contentWidth;
+        margin: 0 $mediumOffset;
 
         display: flex;
         justify-content: space-between;

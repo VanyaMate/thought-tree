@@ -1,10 +1,21 @@
 import React from 'react';
-import ToggleButton from "../../../components/UI/Buttons/ToggleButton/ToggleButton";
+import {useActions, useMySelector} from "../../../hooks/redux.hook";
+import Button from "../../../components/UI/Buttons/Button/Button";
+import {Link} from "react-router-dom";
 
 const HeaderProfile = () => {
+    const user = useMySelector((state) => state.user);
+    const { resetUserData, resetBearer } = useActions();
+
+    const signOut = function () {
+        resetBearer();
+        resetUserData();
+    }
+
     return (
         <div>
-            HeaderProfile
+            <Link to={`/${ user.login }`}>{ user.login }</Link>
+            <Button active onClick={signOut}>Выход</Button>
         </div>
     );
 };

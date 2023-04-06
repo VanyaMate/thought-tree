@@ -5,7 +5,9 @@ import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/Col
 const Bottom = () => {
     return (
         <ColorThemeContainer themeStyles={css} className={css.container}>
-            Bottom
+            <div className={css.content}>
+                Bottom
+            </div>
         </ColorThemeContainer>
     );
 };

@@ -21,6 +21,7 @@ export const authApi = createApi({
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
+                cache: 'no-cache',
                 body
             })
         }),
@@ -33,6 +34,7 @@ export const authApi = createApi({
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
+                cache: 'no-cache',
                 body
             })
         })

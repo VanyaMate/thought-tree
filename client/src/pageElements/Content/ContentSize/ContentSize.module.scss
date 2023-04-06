@@ -1,6 +1,7 @@
-@import "src/styles/colors";
+
 @import "src/styles/sizes";
 
 .container {
     width: $contentWidth;
+    margin: $mediumOffset;
 }

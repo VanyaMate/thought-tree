@@ -1,14 +1,14 @@
 import React from 'react';
-import css from './Auth.module.scss';
 import AuthLogin from "../../components/Auth/AuthLogin/AuthLogin";
 import AuthRegistration from "../../components/Auth/AuthRegistration/AuthRegistration";
+import ContentSize from "../../pageElements/Content/ContentSize/ContentSize";
 
 const Auth = () => {
     return (
-        <div className={css.container}>
+        <ContentSize>
             <AuthLogin/>
             <AuthRegistration/>
-        </div>
+        </ContentSize>
     );
 };
 

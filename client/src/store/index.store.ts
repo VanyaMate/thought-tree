@@ -4,6 +4,7 @@ import {playgroundReducer} from "./playground/playground.slice";
 import {entitiesReducer} from "./entities/entities.slice";
 import {authReducer} from "./auth/auth.slice";
 import {authApi} from "./auth/auth.api";
+import {userReducer} from "./user/user.slice";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         theme: themeSlideReducer,
         playground: playgroundReducer,
         entities: entitiesReducer,
-        auth: authReducer
+        auth: authReducer,
+        user: userReducer,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat([
         authApi.middleware

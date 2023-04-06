@@ -2,17 +2,28 @@ import React from 'react';
 import Input from "../../UI/Inputs/Input/Input";
 import Button from "../../UI/Buttons/Button/Button";
 import {useNavigate} from "react-router-dom";
-import {useMySelector} from "../../../hooks/redux.hook";
+import {useActions, useMySelector} from "../../../hooks/redux.hook";
 import {useInputValue} from "../../../hooks/useInputValue";
+import {useLazyLoginQuery, useLazyRegistrationQuery} from "../../../store/auth/auth.api";
 
 const AuthLogin = () => {
     const navigate = useNavigate();
-    const auth = useMySelector((state) => state.auth);
+    const { setBearer, setUserLogin, addUserEntities, addUserTrees } = useActions();
+    const [dispatchLogin, { isFetching, data, isError }] = useLazyLoginQuery();
     const login = useInputValue('');
     const pass = useInputValue('');
 
     const authMethod = () => {
-        console.log('auth with', login.current, pass.current);
+        dispatchLogin({ login: login.current, password: pass.current }).then((response) => {
+            if (response.data) {
+                setBearer(response.data.token);
+                setUserLogin(response.data.login);
+                addUserEntities(response.data.entities ?? []);
+                addUserTrees(response.data.trees ?? []);
+
+                navigate(`/${login.current}`);
+            }
+        })
     }
 
     return (

@@ -1,10 +1,11 @@
 import React from 'react';
+import ContentSize from "../../pageElements/Content/ContentSize/ContentSize";
 
 const Home = () => {
     return (
-        <div>
+        <ContentSize>
             HomePage
-        </div>
+        </ContentSize>
     );
 };
 

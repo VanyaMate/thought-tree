@@ -7,7 +7,9 @@ import EntityLine from "./EntityLine/EntityLine";
 export interface IEntityData {
     id: string,
     title: string,
-    text: string
+    text: string,
+    createdAt?: string,
+    updatedAt?: string,
 }
 
 export interface IEntity {

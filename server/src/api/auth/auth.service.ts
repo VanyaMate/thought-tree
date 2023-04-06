@@ -27,7 +27,7 @@ export class AuthService {
             /**
              * TODO: Добавить еще постоянный токен в базу
              */
-            return this._generateToken(user);
+            return this._getUserData(user);
         }
         catch (e) {
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
@@ -36,21 +36,30 @@ export class AuthService {
 
     async login (userDto: CreateUserDto) {
         try {
-            const candidate = await this.userService.getByLogin(userDto.login);
+            const candidate = await this.userService._getByLoginFull(userDto.login);
             if (candidate && bcrypt.compareSync(userDto.password, candidate.password)) {
-                return this._generateToken(candidate);
+                return this._getUserData(candidate);
             }
+
+            throw new HttpException('Неправильные данные', HttpStatus.BAD_REQUEST);
         }
         catch (e) {
             throw new HttpException('Неправильные данные', HttpStatus.BAD_REQUEST);
         }
     }
 
-    private _generateToken (user: User): { token: string } {
-        const payload = {login: user.login, id: user.id};
+    private _getUserData (user: User) {
         return {
-            token: this.jwtService.sign(payload)
+            token: this._generateToken(user),
+            login: user.login,
+            trees: user.trees,
+            entities: user.entities,
         }
+    }
+
+    private _generateToken (user: User): string {
+        const payload = {login: user.login, id: user.id};
+        return this.jwtService.sign(payload);
     }
 
 }

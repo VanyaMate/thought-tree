@@ -48,6 +48,16 @@ export class UserService {
         }
     }
 
+    async _getByLoginFull (login: string) {
+        try {
+            const user = await this.userRepository.findOne({ where: { login } });
+            return user;
+        }
+        catch (e) {
+            throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
+        }
+    }
+
     private _getIncludes (tree: number, entities: number) {
         const includes = [];
 

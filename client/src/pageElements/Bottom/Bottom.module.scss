@@ -5,6 +5,13 @@
     position: relative;
     width: 100%;
     height: $smallHeight;
+    display: flex;
+    justify-content: center;
+
+    .content {
+        width: $contentWidth;
+        margin: 0 $mediumOffset;
+    }
 
     &.light {
         background: $white;
