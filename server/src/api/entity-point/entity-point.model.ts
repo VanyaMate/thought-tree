@@ -14,7 +14,6 @@ import {EntityToEntity} from "./entity-to-entity.model";
 
 export interface IEntityPointCreationData {
     author_id: number,
-    parent_id: number | null,
     title: string,
     text: string
 }

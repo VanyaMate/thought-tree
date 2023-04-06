@@ -19,7 +19,7 @@ export class Tree extends Model<Tree, ITreeCreationData> {
     author_id: User;
 
     @Column({ type: DataType.STRING, allowNull: false })
-    name: string;
+    title: string;
 
     @Column({ type: DataType.STRING, allowNull: false, defaultValue: '{}' })
     tree_json: string;

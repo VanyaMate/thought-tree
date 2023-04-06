@@ -30,9 +30,4 @@ export class EntityPointController {
         return this.entityService.getById(param.id);
     }
 
-    @Get('/getTreeById/:id')
-    getTreeById(@Param() param: { id: number }) {
-        return this.entityService.getTreeById(param.id);
-    }
-
 }

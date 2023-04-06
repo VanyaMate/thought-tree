@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
 import {UserService} from "./user.service";
 import {CreateUserDto} from "./dto/create-user.dto";
 
@@ -13,8 +13,8 @@ export class UserController {
     }
 
     @Get('/:login')
-    getByLogin (@Param() login: string) {
-        return this.userService.getByLogin(login);
+    getByLogin (@Param() params: { login: string }, @Query() query: { tree?: number, entities?: number }) {
+        return this.userService.getByLogin(params.login, +query.tree, +query.entities);
     }
 
 }

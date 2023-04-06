@@ -17,17 +17,10 @@ export class EntityPointService {
     async create (entityDto: CreateEntityPointDto, authToken: string) {
         try {
             const [_, token] = authToken.split(' ');
-            const {parent_id, ...other} = entityDto;
-            const entity = await this.entityRepository.create(other);
-
-            if (parent_id) {
-                await this.entityToEntityRepo.create({ parent_id, child_id: entity.id })
-            }
-
-            return entity;
+            const { id: author_id } = this.jwtService.decode(token) as { id: number };
+            return this.entityRepository.create({ ...entityDto, author_id });
         }
         catch (e) {
-            console.log(e);
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
         }
     }
@@ -43,26 +36,14 @@ export class EntityPointService {
 
     async getAll () {
         try {
-            return this.entityRepository.findAll({
-                attributes: ['id', 'title', 'text'],
-                include: [
-                    { model: User, attributes: [ 'login' ] },
-                    { model: EntityPoint, attributes: ['id', 'title', 'text'], as: 'children', nested: true },
-                    { model: EntityPoint, attributes: ['id', 'title', 'text'], as: 'parent' }
-                ]
-            })
+            return this.entityRepository.findAll({ attributes: [] });
         }
         catch (e) {
-            console.log(e);
             throw new HttpException('Ошибка сервера', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     async getById(id: number) {
-
-    }
-
-    async getTreeById(id: number, tree: any = {}) {
 
     }
 
