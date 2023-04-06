@@ -13,6 +13,10 @@ export class AuthService {
 
     async registration (userDto: CreateUserDto) {
         try {
+            if (!userDto.login || !userDto.password) {
+                throw new HttpException('Неправильные данные', HttpStatus.BAD_REQUEST);
+            }
+
             const candidate = await this.userService.getByLogin(userDto.login);
             if (candidate) {
                 throw new HttpException('Пользователь с таким login уже существует', HttpStatus.BAD_REQUEST);
