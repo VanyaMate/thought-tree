@@ -1,12 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ColorTheme} from "../../types/variations.themes";
+import {themeStorage} from "../../cfg/storages";
 
 export interface ITheme {
     type: string
 }
 
 const initialState: ITheme = {
-    type: ColorTheme.DARK
+    type: localStorage.getItem(themeStorage) ?? ColorTheme.DARK
 }
 
 export const themeSlice = createSlice({
@@ -18,6 +19,7 @@ export const themeSlice = createSlice({
         },
         toggleTheme (state) {
             state.type = state.type === ColorTheme.DARK ? ColorTheme.LIGHT : ColorTheme.DARK;
+            localStorage.setItem(themeStorage, state.type);
         }
     }
 })
