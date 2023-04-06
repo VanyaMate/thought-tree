@@ -1,6 +1,8 @@
 # Thought Tree
 
+
 ---
+
 
 ###Технологии
 
@@ -20,7 +22,9 @@
 - Sequelize ORM
 - PostgreSQL
 
+
 ---
+
 
 ###Запуск у себя
 
