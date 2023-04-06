@@ -37,13 +37,13 @@ export class EntityPoint extends Model<EntityPoint, IEntityPointCreationData> {
     @Column({ type: DataType.STRING, allowNull: false })
     text: string;
 
+    @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
+    likesAmount: number;
+
+    @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
+    showsCount: number;
+
     @BelongsTo(() => User)
     author: User;
-
-    @BelongsToMany(() => EntityPoint, () => EntityToEntity, 'child_id')
-    parent: EntityPoint;
-
-    @BelongsToMany(() => EntityPoint, () => EntityToEntity, 'parent_id')
-    children: EntityPoint[]
 
 }

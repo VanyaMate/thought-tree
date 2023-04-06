@@ -20,6 +20,9 @@ export class AuthService {
 
             const hashPassword = await bcrypt.hash(userDto.password, 5);
             const user = await this.userService.create({...userDto, password: hashPassword});
+            /**
+             * TODO: Добавить еще постоянный токен в базу
+             */
             return this._generateToken(user);
         }
         catch (e) {
@@ -30,7 +33,6 @@ export class AuthService {
     async login (userDto: CreateUserDto) {
         try {
             const candidate = await this.userService.getByLogin(userDto.login);
-            console.log(candidate);
             if (candidate && bcrypt.compareSync(userDto.password, candidate.password)) {
                 return this._generateToken(candidate);
             }

@@ -1,10 +1,10 @@
-import {Column, DataType, ForeignKey, HasMany, HasOne, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
 import {User} from "../user/user.model";
-import {EntityPoint} from "../entity-point/entity-point.model";
 
 export interface ITreeCreationData {
-    authorId: number,
+    author_id: number,
     name: string,
+    tree_json?: string
 }
 
 @Table({
@@ -16,12 +16,15 @@ export class Tree extends Model<Tree, ITreeCreationData> {
     id: number;
 
     @ForeignKey(() => User)
-    author: User;
+    author_id: User;
 
     @Column({ type: DataType.STRING, allowNull: false })
     name: string;
 
-    @ForeignKey(() => EntityPoint)
-    rootEntity: EntityPoint;
+    @Column({ type: DataType.STRING, allowNull: false, defaultValue: '{}' })
+    tree_json: string;
+
+    @BelongsTo(() => User)
+    author: User;
 
 }
