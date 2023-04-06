@@ -8,13 +8,47 @@
     height: $mediumHeight;
     box-shadow: $defaultLightBoxShadow;
 
+    .content {
+        width: $contentWidth;
+        margin: auto;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_left {
+            display: flex;
+
+            .logo {
+                font-size: 20px;
+                font-weight: bold;
+
+                .link {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        &_right {
+            display: flex;
+        }
+    }
+
     &.light {
         background: $white;
         color: $darkBlack;
+
+        .link {
+            color: $darkBlack;
+        }
     }
 
     &.dark {
         background: $darkBlack;
         color: $white;
+
+        .link {
+            color: $white;
+        }
     }
 }

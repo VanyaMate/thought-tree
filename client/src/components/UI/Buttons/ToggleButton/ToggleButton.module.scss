@@ -1,0 +1,67 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+$height: $mediumSmallHeight;
+$offset: 3px;
+$transition: .1s ease-in-out;
+
+.button {
+    width: calc(#{$height} * 2);
+    height: calc(#{$height} + #{$offset * 2});
+    border-radius: calc((#{$height} + #{$offset * 2}) / 2);
+    cursor: pointer;
+    transition: $transition;
+
+    &_active {
+
+    }
+
+    .point {
+        width: $height;
+        height: $height;
+        border-radius: 50%;
+        transform: translateX($offset) translateY($offset);
+        transition: $transition;
+
+        &_active {
+            transform: translateX(calc(100% - #{$offset})) translateY($offset);
+        }
+    }
+
+    &.dark {
+        &.button {
+            background: $black;
+
+            &_active {
+                background: $markBlueLight;
+            }
+
+            .point {
+                background: $gray;
+
+                &_active {
+                    background: $white;
+                }
+            }
+        }
+    }
+
+    &.light {
+        &.button {
+            background: $lightGray;
+
+            &_active {
+                background: $markBlueLight;
+            }
+
+            .point {
+                background: $white;
+
+                &_active {
+                    background: $white;
+                }
+            }
+        }
+    }
+
+}

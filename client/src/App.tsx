@@ -4,11 +4,11 @@ import Playground from "./pageElements/Playground/Playground";
 import Bottom from "./pageElements/Bottom/Bottom";
 import Gui from "./pageElements/Gui/Gui";
 import { Routes, Route } from 'react-router-dom';
-import Auth from "./pageElements/Auth/Auth";
-import Home from "./pageElements/Home/Home";
-import Page404 from "./pageElements/404/Page404";
-import Profile from "./pageElements/Profile/Profile";
-import EntityPage from "./pageElements/EntityPage/EntityPage";
+import Auth from "./pages/Auth/Auth";
+import Home from "./pages/Home/Home";
+import Page404 from "./pages/404/Page404";
+import Profile from "./pages/Profile/Profile";
+import EntityPage from "./pages/EntityPage/EntityPage";
 import Content from "./pageElements/Content/Content";
 
 const App = () => {
