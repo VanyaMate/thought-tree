@@ -1,11 +1,11 @@
 # Thought Tree
 
 ---
-##Технологии
+###Технологии
 
 Сборщик: **vite**
 
-### Fontend
+### Frontend
 
 - TypeScript
 - React
@@ -20,7 +20,7 @@
 - PostgreSQL
 
 ---
-##Запуск у себя
+###Запуск у себя
 
 > Для этого вам нужен установленный PostgresSQL
 
