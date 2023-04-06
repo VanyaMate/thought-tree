@@ -1,11 +1,11 @@
 import React, {ReactElement, useMemo, useState} from "react";
-import EntityTextareaItem from "../components/EntityTextarea/EntityTextareaItem/EntityTextareaItem";
-import EntityTextarea from "../components/EntityTextarea/EntityTextarea";
-import {parseEntityTextarea} from "../components/EntityTextarea/parseEntityTextarea";
+import EntityTextareaItem from "../components/Entity/EntityTextarea/EntityTextareaItem/EntityTextareaItem";
+import EntityTextarea from "../components/Entity/EntityTextarea/EntityTextarea";
+import {parseEntityTextarea} from "../components/Entity/EntityTextarea/parseEntityTextarea";
 import {EntityTextareaComponent} from "../types/entityTextareaComponent";
-import EntityTextareaColor from "../components/EntityTextarea/EntityTextareaColor/EntityTextareaColor";
+import EntityTextareaColor from "../components/Entity/EntityTextarea/EntityTextareaColor/EntityTextareaColor";
 import EntityTextareaScrollButton
-    from "../components/EntityTextarea/EntityTextareaScrollButton/EntityTextareaScrollButton";
+    from "../components/Entity/EntityTextarea/EntityTextareaScrollButton/EntityTextareaScrollButton";
 
 export const useEntityTextareaHook = function (value: string): ReactElement[] {
     const [text, setText]= useState<string>(value);

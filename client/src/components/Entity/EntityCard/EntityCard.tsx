@@ -6,7 +6,7 @@ import {IEntity, IEntityData} from "../Entity";
 import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 import PlaygroundThemeContainer from "../../Themes/PlaygroundThemeContainer/PlaygroundThemeContainer";
 import ScrollToEntityButton from "../../Buttons/ScrollToEntityButton/ScrollToEntityButton";
-import EntityTextarea from "../../EntityTextarea/EntityTextarea";
+import EntityTextarea from "../EntityTextarea/EntityTextarea";
 
 export interface IEntityCard extends IEntity {
     ref?: any,

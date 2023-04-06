@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import css from './EntityTextareaItem.module.scss';
-import {EntityTextareaComponent} from "../../../types/entityTextareaComponent";
-import {useMySelector} from "../../../hooks/redux.hook";
+import {EntityTextareaComponent} from "../../../../types/entityTextareaComponent";
+import {useMySelector} from "../../../../hooks/redux.hook";
 
 export interface IEntityTextareaItem {
     value: string,

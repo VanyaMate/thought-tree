@@ -6,7 +6,7 @@ export interface IAuth {
 }
 
 const initialState = {
-    bearer: localStorage.getItem(authStorage) || 'asd'
+    bearer: localStorage.getItem(authStorage) || ''
 }
 
 export const authSlice = createSlice({
@@ -15,6 +15,11 @@ export const authSlice = createSlice({
     reducers: {
         setBearer: (state, action: PayloadAction<string>) => {
             state.bearer = action.payload;
+            localStorage.setItem(authStorage, action.payload)
+        },
+        resetBearer: (state) => {
+            state.bearer = ''
+            localStorage.removeItem(authStorage);
         }
     }
 })

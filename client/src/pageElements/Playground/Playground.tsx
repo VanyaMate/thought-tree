@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import css from './Playground.module.scss';
-import PlaygroundScrollContainer from "../../components/PlaygroundScrollContainer/PlaygroundScrollContainer";
+import PlaygroundScrollContainer from "../../components/PlaygroundContent/PlaygroundScrollContainer/PlaygroundScrollContainer";
 import {useActions, useMySelector} from "../../hooks/redux.hook";
 import PlaygroundContent from "../../components/PlaygroundContent/PlaygroundContent";
 import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";

@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import ThemeContainer from "../Themes/ThemeContainer/ThemeContainer";
+import ThemeContainer from "../../Themes/ThemeContainer/ThemeContainer";
 import css from './PlaygroundScrollContainer.module.scss';
-import {IDefaultComponent} from "../IDefaultComponent";
-import {useActions, useMySelector} from "../../hooks/redux.hook";
-import {ColorTheme} from "../../types/variations.themes";
-import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
+import {IDefaultComponent} from "../../IDefaultComponent";
+import {useActions, useMySelector} from "../../../hooks/redux.hook";
+import {ColorTheme} from "../../../types/variations.themes";
+import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 
 const PlaygroundScrollContainer: React.FC<IDefaultComponent> = (props) => {
     const container = useRef<HTMLDivElement>(null);

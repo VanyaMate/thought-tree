@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from 'react';
-import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
+import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 import css from './CreateEntity.module.scss';
 import EntityTextarea from "../EntityTextarea/EntityTextarea";
-import {EntityTextareaComponent} from "../../types/entityTextareaComponent";
-import {getFormattedEntityTextareaString} from "../../../utils/entities/getFormattedEntityTextareaString";
-import Button from "../UI/Buttons/Button/Button";
+import {EntityTextareaComponent} from "../../../types/entityTextareaComponent";
+import {getFormattedEntityTextareaString} from "../../../../utils/entities/getFormattedEntityTextareaString";
+import Button from "../../UI/Buttons/Button/Button";
 
 const CreateEntity = () => {
     const last = JSON.stringify({value: 'last', type: EntityTextareaComponent.SCROLL_BUTTON, entityId: 'uid3'})

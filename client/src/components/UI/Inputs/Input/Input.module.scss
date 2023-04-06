@@ -1,5 +1,16 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
 .container {
+    height: $mediumHeight;
+
     .input {
+        height: $mediumHeight;
+        border: none;
+        outline: none;
+        border-radius: $mediumOffset;
+        padding: $mediumOffset;
+
         &.active {
 
         }

@@ -1,10 +1,10 @@
 import React, {ReactElement} from 'react';
 import css from './EntityTextareaScrollButton.module.scss';
-import {useEntityTextareaHook} from "../../../hooks/useEntityTextarea.hook";
-import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
-import {IDefaultComponent} from "../../IDefaultComponent";
-import ScrollToEntityButton from "../../Buttons/ScrollToEntityButton/ScrollToEntityButton";
-import {EntityTextareaComponent} from "../../../types/entityTextareaComponent";
+import {useEntityTextareaHook} from "../../../../hooks/useEntityTextarea.hook";
+import ColorThemeContainer from "../../../Themes/ColorThemeContainer/ColorThemeContainer";
+import {IDefaultComponent} from "../../../IDefaultComponent";
+import ScrollToEntityButton from "../../../Buttons/ScrollToEntityButton/ScrollToEntityButton";
+import {EntityTextareaComponent} from "../../../../types/entityTextareaComponent";
 
 export interface IEntityTextareaScrollButton extends IDefaultComponent {
     value: string,

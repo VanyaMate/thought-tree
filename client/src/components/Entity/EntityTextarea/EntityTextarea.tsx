@@ -1,9 +1,9 @@
 import React, {ReactElement} from 'react';
-import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
+import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 import css from './EntityTextarea.module.scss';
-import {IDefaultComponent} from "../IDefaultComponent";
-import {useEntityTextareaHook} from "../../hooks/useEntityTextarea.hook";
-import {EntityTextareaComponent} from "../../types/entityTextareaComponent";
+import {IDefaultComponent} from "../../IDefaultComponent";
+import {useEntityTextareaHook} from "../../../hooks/useEntityTextarea.hook";
+import {EntityTextareaComponent} from "../../../types/entityTextareaComponent";
 
 export interface IEntityTextarea extends IDefaultComponent {
     value: string

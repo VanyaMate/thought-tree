@@ -9,6 +9,8 @@ $lightThemeColor: $white;
     height: calc(100vh - #{$mediumHeight} - #{$smallHeight});
     overflow: hidden;
     position: relative;
+    display: flex;
+    justify-content: center;
 
     &.light {
         color: $darkThemeColor;

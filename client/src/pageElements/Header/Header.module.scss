@@ -7,10 +7,12 @@
     width: 100%;
     height: $mediumHeight;
     box-shadow: $defaultLightBoxShadow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .content {
         width: $contentWidth;
-        margin: auto;
 
         display: flex;
         justify-content: space-between;

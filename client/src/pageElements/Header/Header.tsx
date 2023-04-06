@@ -1,16 +1,13 @@
 import React from 'react';
 import css from './Header.module.scss';
 import {useActions, useMySelector} from "../../hooks/redux.hook";
-import Button from "../../components/UI/Buttons/Button/Button";
 import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";
 import {Link} from "react-router-dom";
 import HeaderLogin from "./HeaderLogin/HeaderLogin";
 import HeaderProfile from "./HeaderProfile/HeaderProfile";
-import ToggleButton from "../../components/UI/Buttons/ToggleButton/ToggleButton";
 import ToggleTheme from "../../components/Buttons/ToggleTheme/ToggleTheme";
 
 const Header = () => {
-    const { toggleTheme, setPlaygroundTheme } = useActions();
     const auth = useMySelector((state) => state.auth);
 
     return (
