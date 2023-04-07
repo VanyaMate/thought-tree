@@ -2,11 +2,15 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {authStorage} from "../../cfg/storages";
 
 export interface IAuth {
-    bearer: string
+    bearer: string,
+    authentication: boolean,
+    authenticationFetch: boolean,
 }
 
-const initialState = {
-    bearer: localStorage.getItem(authStorage) || ''
+const initialState: IAuth = {
+    bearer: localStorage.getItem(authStorage) || '',
+    authentication: false,
+    authenticationFetch: false,
 }
 
 export const authSlice = createSlice({

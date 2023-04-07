@@ -6,7 +6,6 @@
     z-index: 1000;
     width: 100%;
     height: $mediumHeight;
-    box-shadow: $defaultLightBoxShadow;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +37,7 @@
     }
 
     &.light {
-        background: $white;
+        background: $darkWhite;
         color: $darkBlack;
 
         .link {

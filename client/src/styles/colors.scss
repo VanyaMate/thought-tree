@@ -5,6 +5,7 @@ $lightBlack: #27283b;
 
 $gray: #4f5569;
 $lightGray: #868fab;
+$darkWhite: #d7ddea;
 $white: #e6eaf3;
 $lightWhite: #f7f9fc;
 
@@ -21,6 +22,7 @@ $markYellowLight: #ffcf30;
 
 $defaultBoxShadow: 0 4px 10px -4px rgb(0 0 0 / 100%);
 $defaultLightBoxShadow: 0 2px 5px -3px rgb(0 0 0 / 100%);
+$defaultLightBoxShadow_bottom_1px: 0 1px 1px 0px rgb(0 0 0 / 20%);
 
 @keyframes loading {
     0% {

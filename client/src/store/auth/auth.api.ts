@@ -16,7 +16,7 @@ export const authApi = createApi({
             any, ILogin
             >({
             query: (body) => ({
-                url: '/login',
+                url: '/login?tree=10&entities=10',
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -29,7 +29,7 @@ export const authApi = createApi({
             any, ILogin
             >({
             query: (body) => ({
-                url: '/registration',
+                url: '/registration?tree=10&entities=10',
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
