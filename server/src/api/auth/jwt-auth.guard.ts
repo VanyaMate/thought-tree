@@ -18,10 +18,12 @@ export class JwtAuthGuard implements CanActivate {
             }
 
             const user = this.jwtService.verify(token);
+
             req.user = user;
             return true;
         }
         catch (e) {
+            console.log(e);
             throw new UnauthorizedException({message: 'Пользователь не авторизован'})
         }
     }

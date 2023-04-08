@@ -10,7 +10,6 @@ import {EntityToEntity} from "./entity-to-entity.model";
 export class EntityPointService {
 
     constructor(@Inject("ENTITY_POINT_REPOSITORY") private entityRepository: typeof EntityPoint,
-                @Inject("ENTITY_TO_ENTITY_REPOSITORY") private entityToEntityRepo: typeof EntityToEntity,
                 private jwtService: JwtService,
                 private userService: UserService) {}
 
@@ -18,7 +17,7 @@ export class EntityPointService {
         try {
             const [_, token] = authToken.split(' ');
             const { id: author_id } = this.jwtService.decode(token) as { id: number };
-            return this.entityRepository.create({ ...entityDto, author_id });
+            return await this.entityRepository.create({ ...entityDto, author_id });
         }
         catch (e) {
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);

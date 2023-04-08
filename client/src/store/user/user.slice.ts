@@ -3,6 +3,7 @@ import {IEntityData} from "../../components/Entity/Entity";
 import {userStorage} from "../../cfg/storages";
 
 export interface ITreeData {
+    id: number,
     title: string,
     description: string,
     likesAmount: number,
@@ -15,7 +16,7 @@ export interface ITreeData {
 
 export interface IUser {
     login: string,
-    trees: string[],
+    trees: ITreeData[],
     entities: IEntityData[]
 }
 
@@ -35,7 +36,7 @@ export const userSlice = createSlice({
             state.login = action.payload;
             localStorage.setItem(userStorage, JSON.stringify(state));
         },
-        addUserTrees: (state, action: PayloadAction<string[]>) => {
+        addUserTrees: (state, action: PayloadAction<ITreeData[]>) => {
             state.trees = [...state.trees, ...action.payload];
         },
         addUserEntities: (state, action: PayloadAction<IEntityData[]>) => {

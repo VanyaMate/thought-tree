@@ -14,7 +14,7 @@ const VerticalContainer = styled.div`
         margin-bottom: ${(props: { offset: number }) => `${props.offset}px` || '30px'};
     }
     
-    &:last-child {
+    & > *:last-child {
         margin-bottom: 0;
     }
 `
