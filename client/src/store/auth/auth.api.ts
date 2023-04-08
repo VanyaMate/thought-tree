@@ -16,7 +16,7 @@ export const authApi = createApi({
             any, ILogin
             >({
             query: (body) => ({
-                url: '/login?tree=10&entities=10',
+                url: '/login',
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -29,7 +29,7 @@ export const authApi = createApi({
             any, ILogin
             >({
             query: (body) => ({
-                url: '/registration?tree=10&entities=10',
+                url: '/registration',
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -37,8 +37,21 @@ export const authApi = createApi({
                 cache: 'no-cache',
                 body
             })
+        }),
+        validate: build.query<
+            any, string
+            >({
+            query: (body) => ({
+                url: '/validate',
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'authorization': `Bearer ${ body }`
+                },
+                cache: 'no-cache'
+            })
         })
     })
 })
 
-export const { useLazyLoginQuery, useLazyRegistrationQuery } = authApi;
+export const { useLazyLoginQuery, useLazyRegistrationQuery, useValidateQuery } = authApi;

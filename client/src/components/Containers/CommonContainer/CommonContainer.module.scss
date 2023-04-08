@@ -1,0 +1,19 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    padding: $bigOffset;
+    box-shadow: $defaultLightBoxShadow;
+    border-radius: $mediumOffset;
+
+    &.dark {
+        background: $darkBlack;
+        color: $white;
+    }
+
+    &.light {
+        background: $lightWhite;
+        $color: $darkBlack;
+    }
+
+}

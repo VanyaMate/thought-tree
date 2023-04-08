@@ -50,7 +50,8 @@ export class UserService {
 
     async _getByLoginFull (login: string) {
         try {
-            const user = await this.userRepository.findOne({ where: { login } });
+            const includes = this._getIncludes(10, 10);
+            const user = await this.userRepository.findOne({ where: { login }, include: includes });
             return user;
         }
         catch (e) {

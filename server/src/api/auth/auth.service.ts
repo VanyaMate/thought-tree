@@ -48,6 +48,19 @@ export class AuthService {
         }
     }
 
+    async validate (authToken: string) {
+        try {
+            const token = (authToken || '').split(' ')[1];
+            const { login } = this.jwtService.decode(token) as { login: string };
+            const user = await this.userService._getByLoginFull(login);
+
+            return {...this._getUserData(user), token};
+        }
+        catch (e) {
+            throw new HttpException('Неправильные данные', HttpStatus.BAD_REQUEST);
+        }
+    }
+
     private _getUserData (user: User) {
         return {
             token: this._generateToken(user),

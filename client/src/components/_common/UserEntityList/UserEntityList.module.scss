@@ -1,4 +1,9 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
 .container {
+    padding: $mediumOffset;
+
     .title {
 
     }

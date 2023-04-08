@@ -12,4 +12,4 @@ const Gui: React.FC<IGui> = (props) => {
     );
 };
 
-export default Gui;
+export default React.memo(Gui);

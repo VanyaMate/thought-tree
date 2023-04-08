@@ -2,6 +2,17 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IEntityData} from "../../components/Entity/Entity";
 import {userStorage} from "../../cfg/storages";
 
+export interface ITreeData {
+    title: string,
+    description: string,
+    likesAmount: number,
+    showsCount: number,
+    createdAt: string,
+    updatedAt: string,
+    author: string,
+    tree_json: string, // JSON
+}
+
 export interface IUser {
     login: string,
     trees: string[],
@@ -12,8 +23,8 @@ const userSavedData: IUser = JSON.parse(localStorage.getItem(userStorage) ?? "{}
 
 const initialState: IUser = {
     login: userSavedData.login ?? '',
-    trees: userSavedData.trees ?? [],
-    entities: userSavedData.entities ?? [],
+    trees: [],
+    entities: [],
 }
 
 export const userSlice = createSlice({
@@ -26,11 +37,9 @@ export const userSlice = createSlice({
         },
         addUserTrees: (state, action: PayloadAction<string[]>) => {
             state.trees = [...state.trees, ...action.payload];
-            localStorage.setItem(userStorage, JSON.stringify(state));
         },
         addUserEntities: (state, action: PayloadAction<IEntityData[]>) => {
             state.entities = [...state.entities, ...action.payload];
-            localStorage.setItem(userStorage, JSON.stringify(state));
         },
         resetUserData: (state) => {
             state.login = '';

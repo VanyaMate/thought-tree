@@ -1,0 +1,15 @@
+@import "src/styles/sizes";
+
+.container {
+    display: flex;
+
+    .left {
+        width: 60%;
+    }
+
+    .right {
+        width: calc(40% - #{$mediumOffset});
+        margin-left: $mediumOffset;
+    }
+
+}

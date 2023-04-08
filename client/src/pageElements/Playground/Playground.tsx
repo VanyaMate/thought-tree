@@ -40,4 +40,4 @@ const Playground = () => {
     );
 };
 
-export default Playground;
+export default React.memo(Playground);

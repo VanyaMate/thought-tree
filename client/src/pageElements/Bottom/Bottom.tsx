@@ -12,4 +12,4 @@ const Bottom = () => {
     );
 };
 
-export default Bottom;
+export default React.memo(Bottom);

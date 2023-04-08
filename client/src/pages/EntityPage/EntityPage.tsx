@@ -12,4 +12,4 @@ const EntityPage = () => {
     );
 };
 
-export default EntityPage;
+export default React.memo(EntityPage);
