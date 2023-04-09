@@ -15,7 +15,7 @@ const UserTreeList: React.FC<IUserTreeList> = (props) => {
             <h3>Tree list: { props.user.login }</h3>
             <Vertical offset={10} className={css.list}>
                 {
-                    props.user.trees.map((tree) => <div key={tree.id}>{tree.title}</div>)
+                    props.user.trees.map((tree) => <div key={tree.id}>{tree.title} - {tree.tree_json} / { props.user.login }</div>)
                 }
             </Vertical>
         </CommonContainer>
