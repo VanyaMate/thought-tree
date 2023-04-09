@@ -5,7 +5,7 @@ import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContain
 import EntityLine from "./EntityLine/EntityLine";
 
 export interface IEntityData {
-    id: string,
+    id: number,
     title: string,
     text: string,
     createdAt?: string,

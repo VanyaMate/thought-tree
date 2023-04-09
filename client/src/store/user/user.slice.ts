@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IEntityData} from "../../components/Entity/Entity";
 import {userStorage} from "../../cfg/storages";
+import {act} from "react-dom/test-utils";
 
 export interface ITreeData {
     id: number,
@@ -41,6 +42,12 @@ export const userSlice = createSlice({
         },
         addUserEntities: (state, action: PayloadAction<IEntityData[]>) => {
             state.entities = [...state.entities, ...action.payload];
+        },
+        removeUserTree: (state, action: PayloadAction<number>) => {
+            state.trees = state.trees.filter((tree) => tree.id !== action.payload);
+        },
+        removeUserEntity: (state, action: PayloadAction<number>) => {
+            state.entities = state.entities.filter((entity) => entity.id !== action.payload);
         },
         resetUserData: (state) => {
             state.login = '';

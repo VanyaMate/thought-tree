@@ -4,6 +4,7 @@ import {IUser} from "../../../store/user/user.slice";
 import css from './UserEntityList.module.scss';
 import CommonContainer from "../../Containers/CommonContainer/CommonContainer";
 import Vertical from "../../Containers/Vertical/Vertical";
+import CreateEntity from "../../Entity/CreateEntity/CreateEntity";
 
 export interface IUserEntityList extends IDefaultComponent {
     user: IUser
@@ -18,6 +19,7 @@ const UserEntityList: React.FC<IUserEntityList> = (props) => {
                     props.user.entities.map((entity) => <div key={entity.id} className={css.item}>{entity.title}</div>)
                 }
             </Vertical>
+            <h3>Create Entity</h3>
         </CommonContainer>
     );
 };

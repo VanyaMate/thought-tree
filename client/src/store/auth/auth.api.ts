@@ -54,4 +54,4 @@ export const authApi = createApi({
     })
 })
 
-export const { useLazyLoginQuery, useLazyRegistrationQuery, useValidateQuery } = authApi;
+export const { useLazyLoginQuery, useLazyRegistrationQuery, useValidateQuery, useLazyValidateQuery } = authApi;
