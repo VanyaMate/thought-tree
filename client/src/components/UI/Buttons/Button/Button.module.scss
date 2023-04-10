@@ -25,14 +25,32 @@
     }
 
     &.light {
-        background: $white;
+        background: transparent;
         color: $darkBlack;
-        border: 1px solid $markBlueLight;
+        border: 1px solid $lightGray;
+
+        &.active {
+            border: 1px solid $markBlueLight;
+
+            &:hover {
+                background: $markBlueLight;
+                color: $white;
+            }
+        }
     }
 
     &.dark {
-        background: $markBlueLight;
+        background: transparent;
         color: $white;
         border: 1px solid $markBlueLight;
+
+        &.active {
+            border: 1px solid $markBlueLight;
+
+            &:hover {
+                background: rgba($markBlueLight, 1);
+                color: $white;
+            }
+        }
     }
 }

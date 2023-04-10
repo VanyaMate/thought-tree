@@ -6,7 +6,6 @@ export const MINIMAL_TREE_DATA: (limit?: number) => FindOptions<Tree> = (limit: 
         'id',
         'title',
         'description',
-        'tree_json',
         'likesAmount',
         'showsCount',
     ],

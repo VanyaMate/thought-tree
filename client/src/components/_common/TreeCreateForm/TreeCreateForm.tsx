@@ -4,6 +4,7 @@ import Button from "../../UI/Buttons/Button/Button";
 import {useActions, useMySelector} from "../../../hooks/redux.hook";
 import {useInputValue} from "../../../hooks/useInputValue";
 import {useLazyCreateTreeQuery} from "../../../store/tree/tree.api";
+import Vertical from "../../Containers/Vertical/Vertical";
 
 const TreeCreateForm = () => {
     const auth = useMySelector((state) => state.auth);
@@ -13,7 +14,7 @@ const TreeCreateForm = () => {
     const { addUserTrees } = useActions();
 
     return (
-        <>
+        <Vertical offset={10}>
             <Input inputValue={title} placeholder={'title'}/>
             <Input inputValue={description} placeholder={'description'}/>
             <Button active={title.current.trim().length !== 0} onClick={() => {
@@ -27,7 +28,7 @@ const TreeCreateForm = () => {
                     addUserTrees([response.data]);
                 })
             }}>Добавить</Button>
-        </>
+        </Vertical>
     );
 };
 

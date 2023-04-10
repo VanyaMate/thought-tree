@@ -45,4 +45,17 @@ export class TreeService {
         }
     }
 
+    async getFull (id: number) {
+        try {
+            const tree = await this.treeRepository.findByPk(id, { include: {
+                model: User,
+                attributes: ['id', 'login']
+            }});
+            return tree;
+        }
+        catch (e) {
+            throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

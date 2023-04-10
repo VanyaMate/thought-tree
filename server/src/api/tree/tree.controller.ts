@@ -1,4 +1,4 @@
-import {Body, Controller, Headers, Post, UseGuards} from "@nestjs/common";
+import {Body, Controller, Get, Headers, Param, Post, UseGuards} from "@nestjs/common";
 import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 import {CreateTreeDto} from "./dto/create-tree.dto";
 import {TreeService} from "./tree.service";
@@ -18,6 +18,11 @@ export class TreeController {
     @UseGuards(JwtAuthGuard)
     delete (@Body() data: { id: number }, @Headers('authorization') authToken: string) {
         return this.treeService.delete(data.id, authToken);
+    }
+
+    @Get('/get/:id')
+    getFull(@Param() data: { id: number }) {
+        return this.treeService.getFull(data.id);
     }
 
 }

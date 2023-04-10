@@ -1,10 +1,13 @@
-import React, {ReactElement, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import css from './PlaygroundContent.module.scss';
-import Entity from "../Entity/Entity";
-import {data} from "./_tempo_data";
+import Entity, {IEntity} from "../Entity/Entity";
 import {useLocation} from 'react-router-dom'
 
-const PlaygroundContent = () => {
+export interface IPlaygroundContent {
+    entry: IEntity
+}
+
+const PlaygroundContent: React.FC<IPlaygroundContent> = (props) => {
     const { hash } = useLocation();
 
     useEffect(() => {
@@ -21,29 +24,9 @@ const PlaygroundContent = () => {
         }
     }, [hash])
 
-    /**
-     * TODO: Убрать этот временный код
-     */
-    const str = 'test string (&){"title": "component1"}(&) some string (&){"title": "component2"}(&)';
-    const regex = /\(&\)(.*?)\(&\)/g;
-    const texts: string[] = str.split(regex);
-    const result: ReactElement[] = [];
-
-
-    for (let i = 0; i < texts.length; i++) {
-        try {
-            const json = JSON.parse(texts[i]);
-            result[i] = <span style={{fontSize: 40}}>{json.title}</span>
-        } catch {
-            result[i] = <>{texts[i]}</>
-        }
-    }
-
-    // <EntityPage {...data} root/>
-    // <CreateEntity/>
     return (
         <div className={css.content}>
-            <Entity {...data} root/>
+            <Entity {...props.entry} root/>
         </div>
     );
 };

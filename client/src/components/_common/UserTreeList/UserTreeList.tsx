@@ -10,6 +10,7 @@ import {useActions, useMySelector} from "../../../hooks/redux.hook";
 import Input from "../../UI/Inputs/Input/Input";
 import {useInputValue} from "../../../hooks/useInputValue";
 import TreeCreateForm from "../TreeCreateForm/TreeCreateForm";
+import {Link} from "react-router-dom";
 
 export interface IUserTreeList extends IDefaultComponent {
     user: IUser
@@ -21,11 +22,8 @@ const UserTreeList: React.FC<IUserTreeList> = (props) => {
      * Пока что это просто тест бэка
      */
     const [dispatchTreeDelete] = useLazyDeleteTreeQuery();
-    const [dispatchTreeCreate] = useLazyCreateTreeQuery();
-    const { removeUserTree, addUserTrees } = useActions();
+    const { removeUserTree } = useActions();
     const auth = useMySelector((state) => state.auth);
-    const title = useInputValue('');
-    const description = useInputValue('');
 
     return (
         <CommonContainer className={css.container}>
@@ -34,7 +32,7 @@ const UserTreeList: React.FC<IUserTreeList> = (props) => {
                 {
                     props.user.trees.map((tree) =>
                         <div key={tree.id}>
-                            [{ tree.id }] {tree.title} - { props.user.login }
+                            <Link to={`/${ props.user.login }/${ tree.id }`}>[{ tree.id }] {tree.title}</Link> - { props.user.login }
                             <Button active onClick={() => {
                                 dispatchTreeDelete({ id: tree.id, token: auth.bearer }).then((response) => {
                                     removeUserTree(tree.id);
@@ -44,9 +42,7 @@ const UserTreeList: React.FC<IUserTreeList> = (props) => {
                 }
             </Vertical>
             <h3>Add tree</h3>
-            <Vertical offset={10}>
-                <TreeCreateForm/>
-            </Vertical>
+            <TreeCreateForm/>
         </CommonContainer>
     );
 };

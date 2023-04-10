@@ -1,6 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
 import Header from "./pageElements/Header/Header";
-import Playground from "./pageElements/Playground/Playground";
 import Bottom from "./pageElements/Bottom/Bottom";
 import Gui from "./pageElements/Gui/Gui";
 import { Routes, Route } from 'react-router-dom';
@@ -14,6 +13,7 @@ import {useMySelector} from "./hooks/redux.hook";
 import {useLazyValidateQuery, useValidateQuery} from "./store/auth/auth.api";
 import AuthValidation from "./pageElements/AuthValidation/AuthValidation";
 import {useAuth, useAuthReset} from "./hooks/useAuth";
+import PlaygroundPage from "./pages/PlaygroundPage/PlaygroundPage";
 
 const App = () => {
     const auth = useMySelector((state) => state.auth);
@@ -46,7 +46,7 @@ const App = () => {
                         : <Routes>
                             <Route path={'/'} element={<Home/>}/>
                             <Route path={'/:login'} element={<Profile/>}/>
-                            <Route path={'/:login/:treeName'} element={<Playground/>}/>
+                            <Route path={'/:login/:treeName'} element={<PlaygroundPage/>}/>
                             <Route path={'/:login/:treeName/:entityId'} element={<EntityPage/>}/>
                             <Route path={'/auth'} element={<Auth/>}/>
                             <Route path={'*'} element={<Page404/>}/>
