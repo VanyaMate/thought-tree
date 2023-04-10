@@ -45,7 +45,7 @@ export class TreeService {
         }
     }
 
-    async getFull (id: number) {
+    async getById (id: number) {
         try {
             const tree = await this.treeRepository.findByPk(id, { include: {
                 model: User,

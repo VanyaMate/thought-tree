@@ -21,8 +21,8 @@ export class TreeController {
     }
 
     @Get('/get/:id')
-    getFull(@Param() data: { id: number }) {
-        return this.treeService.getFull(data.id);
+    getById(@Param() data: { id: number }) {
+        return this.treeService.getById(data.id);
     }
 
 }
