@@ -14,6 +14,9 @@ import {UserModule} from "../user/user.module";
     imports: [
         AuthModule,
         UserModule
+    ],
+    exports: [
+        EntityPointService
     ]
 })
 export class EntityPointModule {}

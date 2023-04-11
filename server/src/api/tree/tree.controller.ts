@@ -20,6 +20,12 @@ export class TreeController {
         return this.treeService.delete(data.id, authToken);
     }
 
+    @Post('/update/tree_json')
+    @UseGuards(JwtAuthGuard)
+    updateTreeJson (@Body() data: { id: number, tree_json: string }, @Headers('authorization') authToken: string) {
+        return this.treeService.updateTreeJson(data.id, data.tree_json, authToken);
+    }
+
     @Get('/get/:id')
     getById(@Param() data: { id: number }) {
         return this.treeService.getById(data.id);

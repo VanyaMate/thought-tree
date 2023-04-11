@@ -24,9 +24,13 @@ const PlaygroundContent: React.FC<IPlaygroundContent> = (props) => {
         }
     }, [hash])
 
+    console.log(props.entry);
+
     return (
         <div className={css.content}>
-            <Entity {...props.entry} root/>
+            {
+                props.entry.data ? <Entity {...props.entry} root/> : 'Loading'
+            }
         </div>
     );
 };

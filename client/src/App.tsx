@@ -22,7 +22,9 @@ const App = () => {
     const resetHandler = useAuthReset();
 
     useMemo(() => {
-        dispatchValidate(auth.bearer);
+        if (auth.bearer !== '') {
+            dispatchValidate(auth.bearer);
+        }
     }, [])
 
     useEffect(() => {
@@ -46,8 +48,8 @@ const App = () => {
                         : <Routes>
                             <Route path={'/'} element={<Home/>}/>
                             <Route path={'/:login'} element={<Profile/>}/>
-                            <Route path={'/:login/:treeName'} element={<PlaygroundPage/>}/>
-                            <Route path={'/:login/:treeName/:entityId'} element={<EntityPage/>}/>
+                            <Route path={'/:login/:treeId'} element={<PlaygroundPage/>}/>
+                            <Route path={'/:login/:treeId/:entityId'} element={<EntityPage/>}/>
                             <Route path={'/auth'} element={<Auth/>}/>
                             <Route path={'*'} element={<Page404/>}/>
                         </Routes>

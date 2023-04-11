@@ -25,7 +25,7 @@ export const treeApi = createApi({
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'authorization': `Bearer ${body.token}`,
+                    'authorization': `Bearer ${ body.token }`,
                 },
                 cache: 'no-cache',
                 body: body.data
@@ -39,13 +39,26 @@ export const treeApi = createApi({
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
-                    'authorization': `Bearer ${token}`,
+                    'authorization': `Bearer ${ token }`,
                 },
                 cache: 'no-cache',
                 body: { id }
             })
         }),
+        getTreeById: build.query<
+            any, { id: number, token: string }
+            >({
+            query: ({ id, token }) => ({
+                url: `/get/${ id }`,
+                method: 'get',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'authorization': `Bearer ${ token }`,
+                },
+                cache: 'no-cache'
+            })
+        })
     })
 })
 
-export const { useLazyCreateTreeQuery, useLazyDeleteTreeQuery } = treeApi;
+export const { useLazyCreateTreeQuery, useLazyDeleteTreeQuery, useLazyGetTreeByIdQuery } = treeApi;

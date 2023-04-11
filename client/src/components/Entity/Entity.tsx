@@ -8,6 +8,9 @@ export interface IEntityData {
     id: number,
     title: string,
     text: string,
+    likesAmount: number,
+    showsCount: number,
+    author: { id: number, login: string },
     createdAt?: string,
     updatedAt?: string,
 }

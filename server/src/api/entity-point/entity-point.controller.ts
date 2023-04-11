@@ -25,7 +25,7 @@ export class EntityPointController {
         return this.entityService.getAll();
     }
 
-    @Get('/getById/:id')
+    @Get('/get/:id')
     getById (@Param() param: { id: number }) {
         return this.entityService.getById(param.id);
     }

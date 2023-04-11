@@ -3,11 +3,18 @@ import {HttpException, HttpStatus, Inject} from "@nestjs/common";
 import {Tree} from "./tree.model";
 import {JwtService} from "@nestjs/jwt";
 import {User} from "../user/user.model";
+import {EntityPointService} from "../entity-point/entity-point.service";
+
+export interface ITreeEntity {
+    id: number,
+    points: ITreeEntity[],
+}
 
 export class TreeService {
 
     constructor(@Inject("TREE_REPOSITORY") private treeRepository: typeof Tree,
-                private jwtService: JwtService) {}
+                private jwtService: JwtService,
+                private entityPointService: EntityPointService) {}
 
     async create (treeDto: CreateTreeDto, authToken: string) {
         try {
@@ -45,17 +52,65 @@ export class TreeService {
         }
     }
 
+    async updateTreeJson(id: number, tree_json: string, authToken: string) {
+        try {
+            const [_, token] = authToken.split(' ');
+            const { id: author_id, login } = this.jwtService.decode(token) as { id: number, login: string };
+
+            console.log(id, tree_json);
+
+            const tree = await this.treeRepository.findByPk(id, { include: { model: User }});
+
+            if (tree && tree.author.id === author_id) {
+                tree.set('tree_json', tree_json);
+                await tree.save();
+                return true;
+            } else {
+                throw new HttpException('Нет доступа', HttpStatus.BAD_REQUEST);
+            }
+        }
+        catch (e) {
+            console.log(e);
+            throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
+        }
+    }
+
     async getById (id: number) {
         try {
             const tree = await this.treeRepository.findByPk(id, { include: {
                 model: User,
                 attributes: ['id', 'login']
             }});
-            return tree;
+
+            const entityIdsList = this._parseEntityIdsFromTreeJson(tree.tree_json);
+            const entityData = await this.entityPointService.getByIds(entityIdsList);
+
+            return {
+                tree,
+                entities: entityData,
+            };
         }
         catch (e) {
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
         }
+    }
+
+    private _parseEntityIdsFromTreeJson (tree_json: string): number[] {
+        try {
+            const tree = JSON.parse(tree_json);
+            if (tree.id) {
+                return this._getIdsFromEntity(tree);
+            } else {
+                return [];
+            }
+        }
+        catch (e) {
+            return [];
+        }
+    }
+
+    private _getIdsFromEntity (entity: ITreeEntity) {
+        return [entity.id, ...entity.points.map((point) => this._getIdsFromEntity(point))];
     }
 
 }

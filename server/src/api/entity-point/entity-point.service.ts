@@ -43,7 +43,16 @@ export class EntityPointService {
     }
 
     async getById(id: number) {
+        return id;
+    }
 
+    async getByIds (ids: number[]) {
+        try {
+            return this.entityRepository.findAll(({ where: { id: ids }, include: [{ model: User, attributes: ['id', 'login'] }] }))
+        }
+        catch (e) {
+            throw new HttpException('Неверные данные', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
