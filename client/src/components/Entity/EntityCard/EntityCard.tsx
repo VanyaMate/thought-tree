@@ -1,7 +1,5 @@
 import React from 'react';
 import css from "./EntityCard.module.scss";
-import {generateString} from "../../../../../utils/methods";
-import {rus} from "../../../../../utils/store.words";
 import {IEntity, IEntityData} from "../Entity";
 import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeContainer";
 import PlaygroundThemeContainer from "../../Themes/PlaygroundThemeContainer/PlaygroundThemeContainer";
@@ -20,11 +18,11 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={`ent-${ props.data.id }`} data-root-entity={props.root ?? 'false'}>
             <ColorThemeContainer themeStyles={css} className={css.card}>
-                <ScrollToEntityButton entityId={parentData?.id || -1}>{parentData?.title}</ScrollToEntityButton>
+                <ScrollToEntityButton entityId={parentData?.id || -1}>{parentData?.title}</ScrollToEntityButton><br/><br/>
                 <h4 className={css.title}>{ props.data.title }</h4>
-                <EntityTextarea className={css.text} value={ props.data.text }/>
+                <EntityTextarea className={css.text} value={ props.data.text }/><br/><br/>
                 {
-                    props.points.map((point) => <ScrollToEntityButton key={point.data.id} entityId={point.data.id}>{point.data.title}</ScrollToEntityButton>)
+                    props.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point.data.id}>{point.data.title}</ScrollToEntityButton>)
                 }
             </ColorThemeContainer>
         </PlaygroundThemeContainer>

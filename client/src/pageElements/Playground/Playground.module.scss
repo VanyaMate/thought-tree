@@ -15,10 +15,30 @@
     &.light {
         background: $white;
         color: $darkBlack;
+
+        .scrollContainer {
+            &::-webkit-scrollbar-track {
+                background: $white;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: $markBlueLight;
+            }
+        }
     }
 
     &.dark {
         background: $darkBlack;
         color: $white;
+
+        .scrollContainer {
+            &::-webkit-scrollbar-track {
+                background: $darkBlack;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: $markBlueLight;
+            }
+        }
     }
 }

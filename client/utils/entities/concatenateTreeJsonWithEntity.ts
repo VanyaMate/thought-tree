@@ -6,7 +6,7 @@ export interface ITreeEntities {
 }
 
 
-export const concatenateTreeWithEntity = function (tree: ITreeEntities, entityList: IEntityData[]) {
+export const concatenateTreeWithEntity = function (tree: ITreeEntities, entityList: IEntityData[]): any {
     try {
         return {
             data: entityList.filter((entity) => entity.id === tree.id)[0],

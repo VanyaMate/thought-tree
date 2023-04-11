@@ -22,9 +22,7 @@ const PlaygroundContent: React.FC<IPlaygroundContent> = (props) => {
                 rootEntity.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
             })
         }
-    }, [hash])
-
-    console.log(props.entry);
+    }, [hash, props.entry])
 
     return (
         <div className={css.content}>

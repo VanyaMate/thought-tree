@@ -57,8 +57,6 @@ export class TreeService {
             const [_, token] = authToken.split(' ');
             const { id: author_id, login } = this.jwtService.decode(token) as { id: number, login: string };
 
-            console.log(id, tree_json);
-
             const tree = await this.treeRepository.findByPk(id, { include: { model: User }});
 
             if (tree && tree.author.id === author_id) {
@@ -70,7 +68,6 @@ export class TreeService {
             }
         }
         catch (e) {
-            console.log(e);
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
         }
     }
@@ -82,7 +79,7 @@ export class TreeService {
                 attributes: ['id', 'login']
             }});
 
-            const entityIdsList = this._parseEntityIdsFromTreeJson(tree.tree_json);
+            const entityIdsList = [...new Set(this._parseEntityIdsFromTreeJson(tree.tree_json))];
             const entityData = await this.entityPointService.getByIds(entityIdsList);
 
             return {
@@ -110,7 +107,7 @@ export class TreeService {
     }
 
     private _getIdsFromEntity (entity: ITreeEntity) {
-        return [entity.id, ...entity.points.map((point) => this._getIdsFromEntity(point))];
+        return [entity.id, ...entity.points.map((point) => this._getIdsFromEntity(point))].flat(1);
     }
 
 }

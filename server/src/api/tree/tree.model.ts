@@ -33,7 +33,7 @@ export class Tree extends Model<Tree, ITreeCreationData> {
     @Column({ type: DataType.INTEGER, allowNull: true, defaultValue: 0 })
     showsCount: number;
 
-    @Column({ type: DataType.STRING, allowNull: false, defaultValue: '{}' })
+    @Column({ type: DataType.TEXT, allowNull: false, defaultValue: '{}' })
     tree_json: string;
 
     @BelongsTo(() => User)
