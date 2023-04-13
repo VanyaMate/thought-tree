@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
 import css from './PlaygroundContent.module.scss';
-import Entity, {IEntity} from "../Entity/Entity";
+import Entity from "../Entity/Entity";
 import {useLocation} from 'react-router-dom'
+import CreateEntity from "../Entity/CreateEntity/CreateEntity";
+import {useMySelector} from "../../hooks/redux.hook";
 
-export interface IPlaygroundContent {
-    entry: IEntity
-}
-
-const PlaygroundContent: React.FC<IPlaygroundContent> = (props) => {
+const PlaygroundContent = () => {
     const { hash } = useLocation();
+    const entities = useMySelector((state) => state.entities);
 
     useEffect(() => {
         const entity = document.querySelector(`${hash.split('-')[0] || 'noelementselector'}`);
@@ -22,12 +21,13 @@ const PlaygroundContent: React.FC<IPlaygroundContent> = (props) => {
                 rootEntity.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
             })
         }
-    }, [hash, props.entry])
+    }, [hash, entities.currentEntity])
 
     return (
         <div className={css.content}>
+            <CreateEntity/>
             {
-                props.entry.data ? <Entity {...props.entry} root/> : 'Loading'
+                entities.currentEntity ? <Entity {...entities.currentEntity} root/> : 'Loading'
             }
         </div>
     );

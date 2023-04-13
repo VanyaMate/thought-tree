@@ -5,6 +5,8 @@ import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeCont
 import PlaygroundThemeContainer from "../../Themes/PlaygroundThemeContainer/PlaygroundThemeContainer";
 import ScrollToEntityButton from "../../Buttons/ScrollToEntityButton/ScrollToEntityButton";
 import EntityTextarea from "../EntityTextarea/EntityTextarea";
+import EntityCardCreateButton from "./EntityCardCreateButton/EntityCardCreateButton";
+import {useMySelector} from "../../../hooks/redux.hook";
 
 export interface IEntityCard extends IEntity {
     ref?: any,
@@ -14,6 +16,8 @@ export interface IEntityCard extends IEntity {
 
 const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEntityCard>((props, ref) => {
     const parentData = props.parentEntity || null;
+    const user = useMySelector((state) => state.user);
+    const entities = useMySelector((state) => state.entities);
 
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={`ent-${ props.data.id }`} data-root-entity={props.root ?? 'false'}>
@@ -24,6 +28,7 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
                 {
                     props.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point.data.id}>{point.data.title}</ScrollToEntityButton>)
                 }
+                { (user.login === props.data.author.login) ? <EntityCardCreateButton hidden={!entities.redactMode}/> : '' }
             </ColorThemeContainer>
         </PlaygroundThemeContainer>
     );

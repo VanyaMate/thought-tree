@@ -6,13 +6,9 @@ import PlaygroundContent from "../../components/PlaygroundContent/PlaygroundCont
 import ColorThemeContainer from "../../components/Themes/ColorThemeContainer/ColorThemeContainer";
 import PlaygroundContentControl
     from "../../components/PlaygroundContent/PlaygroundContentControl/PlaygroundContentControl";
-import {IEntity} from "../../components/Entity/Entity";
 
-export interface IPlayground {
-    entry: IEntity
-}
 
-const Playground: React.FC<IPlayground> = (props) => {
+const Playground = () => {
     const playground = useMySelector(state => state.playground);
     const {setPlaygroundCoords} = useActions();
     const ref = useRef<HTMLDivElement>(null);
@@ -38,7 +34,7 @@ const Playground: React.FC<IPlayground> = (props) => {
             <PlaygroundContentControl/>
             <div className={css.scrollContainer} ref={ref} onScroll={onScroll}>
                 <PlaygroundScrollContainer>
-                    <PlaygroundContent {...props}/>
+                    <PlaygroundContent/>
                 </PlaygroundScrollContainer>
             </div>
         </ColorThemeContainer>

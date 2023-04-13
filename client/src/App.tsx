@@ -48,8 +48,8 @@ const App = () => {
                         : <Routes>
                             <Route path={'/'} element={<Home/>}/>
                             <Route path={'/:login'} element={<Profile/>}/>
-                            <Route path={'/:login/:treeId'} element={<PlaygroundPage/>}/>
-                            <Route path={'/:login/:treeId/:entityId'} element={<EntityPage/>}/>
+                            <Route path={'/tree/:treeId'} element={<PlaygroundPage/>}/>
+                            <Route path={'/entity/:entityId'} element={<EntityPage/>}/>
                             <Route path={'/auth'} element={<Auth/>}/>
                             <Route path={'*'} element={<Page404/>}/>
                         </Routes>

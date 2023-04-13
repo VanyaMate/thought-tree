@@ -20,6 +20,12 @@ export const entitiesSlice = createSlice({
         setEntitiesRedactMode: (state, action: PayloadAction<boolean>) => {
             state.redactMode = action.payload;
         },
+        setCurrentEntity: (state, action: PayloadAction<IEntity>) => {
+            state.currentEntity = action.payload;
+        },
+        resetCurrentEntity: (state) => {
+            state.currentEntity = null;
+        }
     }
 })
 

@@ -1,0 +1,39 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    margin-top: $mediumOffset;
+    border-radius: $mediumOffset;
+    overflow: hidden;
+    height: $mediumHeight;
+    transition: .1s;
+
+    .button {
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    &.hidden {
+        margin-top: 0;
+        height: 0;
+    }
+
+    &.dark {
+        background: $grayBlack;
+        color: $white;
+
+        .button {
+            border: 1px solid transparent;
+        }
+    }
+
+    &.light {
+        background: $white;
+        color: $darkBlack;
+
+        .button {
+            border: 1px solid transparent;
+        }
+    }
+}

@@ -32,7 +32,7 @@ const UserTreeList: React.FC<IUserTreeList> = (props) => {
                 {
                     props.user.trees.map((tree) =>
                         <div key={tree.id}>
-                            <Link to={`/${ props.user.login }/${ tree.id }`}>[{ tree.id }] {tree.title}</Link> - { props.user.login }
+                            <Link to={`/tree/${ tree.id }`}>[{ tree.id }] {tree.title}</Link> - { props.user.login }
                             <Button active onClick={() => {
                                 dispatchTreeDelete({ id: tree.id, token: auth.bearer }).then((response) => {
                                     removeUserTree(tree.id);

@@ -2,7 +2,7 @@ import React, {useEffect, useMemo} from 'react';
 import Playground from "../../pageElements/Playground/Playground";
 import {useLocation, useParams} from "react-router-dom";
 import {useLazyGetTreeByIdQuery} from "../../store/tree/tree.api";
-import {useMySelector} from "../../hooks/redux.hook";
+import {useActions, useMySelector} from "../../hooks/redux.hook";
 import {
     concatenateTreeWithEntity
 } from "../../../utils/entities/concatenateTreeJsonWithEntity";
@@ -10,6 +10,7 @@ import {
 const PlaygroundPage = () => {
     const { pathname } = useLocation();
     const params = useParams<{ treeId: string }>();
+    const { setCurrentEntity, resetCurrentEntity } = useActions();
     const auth = useMySelector((state) => state.auth);
     const [dispatchGettingData, { isFetching, isError, data }] = useLazyGetTreeByIdQuery();
 
@@ -18,18 +19,18 @@ const PlaygroundPage = () => {
         dispatchGettingData({ id: +params.treeId!, token: auth.bearer });
     }, [pathname])
 
-    const entryData = useMemo(() => {
+    useEffect(() => {
         if (data?.tree && data.entities?.length) {
             const tree = JSON.parse(data.tree.tree_json)
 
-            return concatenateTreeWithEntity(tree, data.entities);
+            setCurrentEntity(concatenateTreeWithEntity(tree, data.entities));
         } else {
-            return {};
+            resetCurrentEntity();
         }
     }, [data])
 
     return (
-        <Playground entry={entryData}/>
+        <Playground/>
     );
 };
 
