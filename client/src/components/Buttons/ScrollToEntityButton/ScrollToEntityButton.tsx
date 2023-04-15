@@ -1,7 +1,6 @@
 import React, {useCallback} from 'react';
 import {IDefaultComponent} from "../../IDefaultComponent";
 import Button from "../../UI/Buttons/Button/Button";
-import {IEntityData} from "../../Entity/Entity";
 import {useLocation, useNavigate} from "react-router-dom";
 import {getUUID} from "../../../../../utils/methods";
 
@@ -22,7 +21,7 @@ const ScrollToEntityButton: React.FC<IScrollToEntityButton> = (props) => {
     }
 
     return (
-        <Button active onClick={scrollHandler}>{ props.children }</Button>
+        <Button active onClick={scrollHandler} className={props.className}>{ props.children }</Button>
     );
 };
 

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IEntity} from "../../components/Entity/Entity";
+import {IEntity, IEntityData} from "../../components/Entity/Entity";
 
 export interface IEntities {
     currentEntity: IEntity | null,
@@ -11,6 +11,14 @@ const initialState: IEntities = {
     currentEntity: null,
     entityList: {},
     redactMode: false,
+}
+
+const findEntity = (tree: IEntity, entity: IEntity): IEntity | undefined => {
+    if (tree.data.id === entity.data.id) {
+        return tree;
+    } else {
+        return tree.points.filter((child) => findEntity(child, entity))[0]
+    }
 }
 
 export const entitiesSlice = createSlice({
@@ -25,6 +33,12 @@ export const entitiesSlice = createSlice({
         },
         resetCurrentEntity: (state) => {
             state.currentEntity = null;
+        },
+        addChildToCurrentEntity: (state, action: PayloadAction<{ entity: IEntity, child: IEntityData, author: string }>) => {
+            const entity = findEntity(state.currentEntity!, action.payload.entity);
+            if (entity) {
+                entity.points.push({data: {...action.payload.child, author: { id: 1, login: action.payload.author } }, points: []});
+            }
         }
     }
 })

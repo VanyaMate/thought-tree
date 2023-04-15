@@ -14,6 +14,11 @@ export interface IEntityCard extends IEntity {
     parentEntity?: IEntityData
 }
 
+/**
+ * TODO Это всё ужас. Надо переделать архитектуру хранения/получения/изменения итд данных.
+ * Но в целом примерно уже понятно как это будет выглядеть. Хоть что-то
+ */
+
 const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEntityCard>((props, ref) => {
     const parentData = props.parentEntity || null;
     const user = useMySelector((state) => state.user);
@@ -22,13 +27,18 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={`ent-${ props.data.id }`} data-root-entity={props.root ?? 'false'}>
             <ColorThemeContainer themeStyles={css} className={css.card}>
-                <ScrollToEntityButton entityId={parentData?.id || -1}>{parentData?.title}</ScrollToEntityButton><br/><br/>
+                <ScrollToEntityButton
+                    entityId={parentData?.id || -1}
+                    className={css.parent}
+                >
+                    {parentData?.title}
+                </ScrollToEntityButton>
                 <h4 className={css.title}>{ props.data.title }</h4>
-                <EntityTextarea className={css.text} value={ props.data.text }/><br/><br/>
+                <EntityTextarea className={css.text} value={ props.data.text }/><br/>
                 {
                     props.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point.data.id}>{point.data.title}</ScrollToEntityButton>)
                 }
-                { (user.login === props.data.author.login) ? <EntityCardCreateButton hidden={!entities.redactMode}/> : '' }
+                { (user.login === props.data.author.login) ? <EntityCardCreateButton user={user.login} data={props} hidden={!entities.redactMode}/> : '' }
             </ColorThemeContainer>
         </PlaygroundThemeContainer>
     );

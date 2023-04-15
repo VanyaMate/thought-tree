@@ -4,3 +4,4 @@ export const AUTH_API_URL = `${API_URL}/auth`;
 export const LOGIN_API_URL = `${AUTH_API_URL}/login`;
 export const REGISTRATION_API_URL = `${AUTH_API_URL}/registration`;
 export const TREE_API_URL = `${API_URL}/tree`;
+export const ENTITY_API_URL = `${API_URL}/entity`;

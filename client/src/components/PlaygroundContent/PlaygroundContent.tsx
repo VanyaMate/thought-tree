@@ -25,7 +25,6 @@ const PlaygroundContent = () => {
 
     return (
         <div className={css.content}>
-            <CreateEntity/>
             {
                 entities.currentEntity ? <Entity {...entities.currentEntity} root/> : 'Loading'
             }

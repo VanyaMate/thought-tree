@@ -4,10 +4,10 @@
 .container {
     width: 400px;
     padding: $bigOffset;
-    position: absolute;
-    top: $bigOffset;
+    position: fixed;
+    top: calc(#{$mediumHeight} + #{$bigOffset});
     left: $bigOffset;
-    z-index: 2;
+    z-index: 5;
 
     &.dark {
         background: $darkBlack;

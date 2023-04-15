@@ -10,6 +10,21 @@ $cardWidth: 400px;
     z-index: 2;
     border-radius: $mediumOffset;
 
+    .parent {
+        padding: 0;
+        margin-bottom: $smallOffset;
+        border: 0 solid transparent !important;
+        height: auto !important;
+        color: $markBlueLight;
+        font-size: 14px;
+
+        &:hover {
+            background: transparent !important;
+            color: $markBlueLight !important;
+            text-decoration: underline;
+        }
+    }
+
     &.light {
         background: $lightWhite;
         box-shadow: $defaultLightBoxShadow;

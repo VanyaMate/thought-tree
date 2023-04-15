@@ -6,11 +6,13 @@ import {authReducer} from "./auth/auth.slice";
 import {authApi} from "./auth/auth.api";
 import {userReducer} from "./user/user.slice";
 import {treeApi} from "./tree/tree.api";
+import {entitiesApi} from "./entities/entities.api";
 
 export const store = configureStore({
     reducer: {
         'api/auth': authApi.reducer,
         'api/tree': treeApi.reducer,
+        'api/entities': entitiesApi.reducer,
         theme: themeSlideReducer,
         playground: playgroundReducer,
         entities: entitiesReducer,
@@ -20,6 +22,7 @@ export const store = configureStore({
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat([
         authApi.middleware,
         treeApi.middleware,
+        entitiesApi.middleware
     ])
 })
 
