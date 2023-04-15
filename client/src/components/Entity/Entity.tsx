@@ -10,7 +10,7 @@ export interface IEntityData {
     text: string,
     likesAmount: number,
     showsCount: number,
-    author: { id: number, login: string },
+    author: string,
     createdAt?: string,
     updatedAt?: string,
 }

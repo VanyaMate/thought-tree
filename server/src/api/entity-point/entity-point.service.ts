@@ -16,8 +16,13 @@ export class EntityPointService {
     async create (entityDto: CreateEntityPointDto, authToken: string) {
         try {
             const [_, token] = authToken.split(' ');
-            const { id: author_id } = this.jwtService.decode(token) as { id: number };
-            return await this.entityRepository.create({ ...entityDto, author_id });
+            const { id: author_id, login } = this.jwtService.decode(token) as { id: number, login: string };
+
+            const entity = await this.entityRepository.create({ ...entityDto, author_id });
+
+            return {
+                ...entity.dataValues, author: login
+            }
         }
         catch (e) {
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
