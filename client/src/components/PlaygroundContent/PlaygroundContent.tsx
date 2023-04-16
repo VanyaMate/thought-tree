@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import css from './PlaygroundContent.module.scss';
-import Entity from "../Entity/Entity";
 import {useLocation} from 'react-router-dom'
-import CreateEntity from "../Entity/CreateEntity/CreateEntity";
 import {useMySelector} from "../../hooks/redux.hook";
+import Entity from "../Entity/Entity";
 
 const PlaygroundContent = () => {
     const { hash } = useLocation();
@@ -21,13 +20,11 @@ const PlaygroundContent = () => {
                 rootEntity.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
             })
         }
-    }, [hash, entities.currentEntity])
+    }, [hash, entities.entityTrees, entities.rootId])
 
     return (
         <div className={css.content}>
-            {
-                entities.currentEntity ? <Entity {...entities.currentEntity} root/> : 'Loading'
-            }
+            <Entity root={true} id={entities.rootId}/>
         </div>
     );
 };

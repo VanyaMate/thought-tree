@@ -10,7 +10,7 @@ import {
 const PlaygroundPage = () => {
     const { pathname } = useLocation();
     const params = useParams<{ treeId: string }>();
-    const { setCurrentEntity, resetCurrentEntity } = useActions();
+    const { setCurrentTreeJson, resetCurrentEntity } = useActions();
     const auth = useMySelector((state) => state.auth);
     const [dispatchGettingData, { isFetching, isError, data }] = useLazyGetTreeByIdQuery();
 
@@ -22,8 +22,7 @@ const PlaygroundPage = () => {
     useEffect(() => {
         if (data?.tree && data.entities?.length) {
             const tree = JSON.parse(data.tree.tree_json)
-
-            setCurrentEntity(concatenateTreeWithEntity(tree, data.entities));
+            setCurrentTreeJson(JSON.stringify(concatenateTreeWithEntity(tree, data.entities)));
         } else {
             resetCurrentEntity();
         }

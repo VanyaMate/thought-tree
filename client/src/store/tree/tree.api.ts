@@ -57,8 +57,24 @@ export const treeApi = createApi({
                 },
                 cache: 'no-cache'
             })
-        })
+        }),
+        updateTreeJson: build.query<
+            any, { id: number, tree_json: string, token: string }
+            >({
+            query: ({id, token, tree_json}) => ({
+                url: `/update/tree_json`,
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'authorization': `Bearer ${token}`,
+                },
+                cache: 'no-cache',
+                body: {
+                    id, tree_json
+                }
+            })
+        }),
     })
 })
 
-export const { useLazyCreateTreeQuery, useLazyDeleteTreeQuery, useLazyGetTreeByIdQuery } = treeApi;
+export const { useLazyCreateTreeQuery, useLazyDeleteTreeQuery, useLazyGetTreeByIdQuery, useLazyUpdateTreeJsonQuery } = treeApi;

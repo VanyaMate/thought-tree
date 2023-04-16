@@ -3,6 +3,8 @@ import css from './Entity.module.scss';
 import EntityCard from "./EntityCard/EntityCard";
 import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
 import EntityLine from "./EntityLine/EntityLine";
+import {useMySelector} from "../../hooks/redux.hook";
+import EntityCardCreateButton from "./EntityCard/EntityCardCreateButton/EntityCardCreateButton";
 
 export interface IEntityData {
     id: number,
@@ -20,15 +22,19 @@ export interface IEntity {
     points: IEntity[]
 }
 
-export interface IEntityComponent extends IEntity {
+export interface IEntityComponent {
     parentCard?: React.RefObject<HTMLDivElement>,
-    parentData?: IEntityData,
+    parentId?: number,
+    id: number,
     root?: boolean
 }
 
 const Entity: React.FC<IEntityComponent> = (props) => {
     const card = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
+    const entities = useMySelector((state) => state.entities);
+    const user = useMySelector((state) => state.user);
+    const current = entities.entityTrees[props.id];
 
     useEffect(() => {
         if (card.current && props.parentCard?.current) {
@@ -40,13 +46,17 @@ const Entity: React.FC<IEntityComponent> = (props) => {
         }
     }, [])
 
+    if (!current) {
+        return <>Loading</>
+    }
+
     return (
         <ColorThemeContainer themeStyles={css} className={css.container}>
             <EntityLine width={width}/>
-            <EntityCard {...props} ref={card} parentEntity={props.parentData} root={props.root}/>
+            <EntityCard {...props} ref={card} parentId={props.parentId} id={props.id} root={props.root}/>
             <div className={css.points}>
                 {
-                    props.points.map((point, index) => <Entity key={index} {...point} parentCard={card} parentData={props.data}/>)
+                    current.points.map((point, index) => <Entity key={index} parentCard={card} parentId={props.id} id={point}/>)
                 }
             </div>
         </ColorThemeContainer>

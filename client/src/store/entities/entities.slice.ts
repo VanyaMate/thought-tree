@@ -22,12 +22,13 @@ export interface IEntityJsonPoint {
 }
 
 const initialState: IEntitiesSliceData = {
-    tree_json: '',
-    generated_tree_json: '',
-    entityTrees: {},
-    rootId: -1,
+    tree_json: '',                  // Устанавливается один раз, из него формируется entityTrees и rootId
+    generated_tree_json: '',        // Генерируется из entityTrees в json для сохранения
+    entityTrees: {},                // Содержит список всех ентити с их родителями
+    rootId: -1,                     // Содержит в себе id с которого начать строить дерево
 }
 
+// Сгенерировать entityTrees из дерева
 const getEntityTreesByTree = function (tree: IEntity, entityTrees: entityTree) {
     entityTrees[tree.data.id] = {
         data: tree.data,
@@ -54,13 +55,17 @@ export const entitiesSlice = createSlice({
     initialState,
     reducers: {
         setEntityRedactMode: (state, action: PayloadAction<{ id: number, mode: boolean }>) => {
-            state.entityTrees[action.payload.id].redactMode = action.payload.mode;
+            const entity = state.entityTrees[action.payload.id];
+            if (entity) {
+                entity.redactMode = action.payload.mode;
+            }
         },
         setCurrentTreeJson: (state, action: PayloadAction<string>) => {
             state.tree_json = action.payload;
 
             try {
-                const rootEntity = JSON.parse(action.payload);
+                const rootEntity = JSON.parse(action.payload) as IEntity;
+                state.rootId = rootEntity.data.id;
                 state.entityTrees = getEntityTreesByTree(rootEntity, {});
             }
             catch (e) {
@@ -74,6 +79,7 @@ export const entitiesSlice = createSlice({
         },
         generateTreeJson: (state, action: PayloadAction<number>) => {
             state.generated_tree_json = JSON.stringify(generateNewTreeToJsonById(action.payload, state.entityTrees));
+            console.log(state.generated_tree_json);
         },
         resetCurrentEntity: (state) => {
 

@@ -13,7 +13,7 @@ const ScrollToEntityButton: React.FC<IScrollToEntityButton> = (props) => {
     const navigation = useNavigate();
 
     const scrollHandler = useCallback(() => {
-        navigation(`${location.pathname}#ent-${props.entityId}-${getUUID(5)}`)
+        navigation(`${location.pathname}#ent_${props.entityId}-${getUUID(5)}`)
     }, [props.entityId])
 
     if (props.entityId === -1) {
