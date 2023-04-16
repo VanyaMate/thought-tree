@@ -38,6 +38,30 @@ export class EntityPointService {
         }
     }
 
+    async update (id: number, dto: CreateEntityPointDto, authToken: string) {
+        try {
+            console.log('update entity');
+            const [_, token] = authToken.split(' ');
+            const { id: author_id, login } = this.jwtService.decode(token) as { id: number, login: string };
+
+            const entity = await this.entityRepository.findByPk(id);
+
+            console.log(entity.author_id, author_id);
+            console.log(dto.title, dto.text);
+
+            if (entity && entity.author_id === author_id) {
+                console.log('entity');
+                entity.set('title', dto.title);
+                entity.set('text', dto.text);
+                await entity.save();
+                return true;
+            }
+        }
+        catch (e) {
+            throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);
+        }
+    }
+
     async getAll () {
         try {
             return this.entityRepository.findAll({ attributes: [] });

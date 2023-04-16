@@ -37,7 +37,7 @@ const EntityCardCreateButton: React.FC<IEntityCardCreateButton> = (props) => {
                     }).then((response) => {
                         if (response.data) {
                             addUserEntities([response.data]);
-                            addNewPointToEntity({ entityId: props.toEntity, point: { data: response.data, redactMode: true, points: [] } })
+                            addNewPointToEntity({ entityId: props.toEntity, point: { data: response.data, redactMode: true, points: [], saved: false, edited: false } })
                             navigation(`${location.pathname}#ent_${response.data.id}-${getUUID(5)}`)
                         }
                     })

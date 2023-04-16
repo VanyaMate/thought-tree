@@ -29,4 +29,4 @@ const PlaygroundContentControl = () => {
     );
 };
 
-export default PlaygroundContentControl;
+export default React.memo(PlaygroundContentControl);

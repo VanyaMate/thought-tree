@@ -5,6 +5,8 @@ import {useMySelector} from "../../../../hooks/redux.hook";
 
 export interface IEntityTextareaItem {
     value: string,
+    id: number,
+    onValueChange?: (text: string) => void
 }
 
 const EntityTextareaItem: React.FC<IEntityTextareaItem> = (props) => {
@@ -13,15 +15,13 @@ const EntityTextareaItem: React.FC<IEntityTextareaItem> = (props) => {
 
     return (
         <div
-            contentEditable={entities.redactMode}
+            contentEditable={entities.entityTrees[props.id].redactMode}
             suppressContentEditableWarning={true}
             className={css.container}
             ref={textareaRef}
             data-entity-item={true}
             onSelect={(e) => {
-                console.log('Synt event', e);
                 const selectedText: Selection | null = window.getSelection();
-                console.log('SelecText', selectedText);
                 if (selectedText) {
                     const start = selectedText.anchorOffset;
                     const end = selectedText.focusOffset;
@@ -30,6 +30,7 @@ const EntityTextareaItem: React.FC<IEntityTextareaItem> = (props) => {
                     console.log(node!.textContent!.slice(start, end))
                 }
             }}
+            onInput={(e) => props.onValueChange ? props.onValueChange((e.target as HTMLDivElement).textContent!) : ''}
         >
             { props.value }
         </div>

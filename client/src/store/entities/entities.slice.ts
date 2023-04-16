@@ -4,9 +4,11 @@ import {IEntity, IEntityData} from "../../components/Entity/Entity";
 export type entityTree = { [key: number]: IEntityPoint };
 
 export interface IEntityPoint {
-    data: IEntityData,
-    redactMode: boolean,
-    points: number[],
+    data: IEntityData,              // Информация об entity
+    redactMode: boolean,            // Мод редактирования
+    edited: boolean,                // Было изменено
+    saved: boolean,                 // Данные совпадают с БД
+    points: number[],               // IDs детей
 }
 
 export interface IEntitiesSliceData {
@@ -33,6 +35,8 @@ const getEntityTreesByTree = function (tree: IEntity, entityTrees: entityTree) {
     entityTrees[tree.data.id] = {
         data: tree.data,
         redactMode: false,
+        edited: false,
+        saved: true,
         points: tree.points.map((point) => point.data.id)
     }
 
@@ -82,6 +86,27 @@ export const entitiesSlice = createSlice({
             const newPointId = action.payload.point.data.id;
             state.entityTrees[newPointId] = action.payload.point;
             state.entityTrees[action.payload.entityId].points.push(newPointId);
+        },
+        updateEntityData: (state, action: PayloadAction<{ entityId: number, data: { title?: string, text?: string } }>) => {
+            const entity = state.entityTrees[action.payload.entityId];
+
+            console.log(action.payload.data.title, action.payload.data.text);
+
+            if (entity && (action.payload.data.title || action.payload.data.text)) {
+                console.log('update entity data');
+                entity.data.title = action.payload.data.title ?? entity.data.title;
+                entity.data.text = action.payload.data.text ?? entity.data.text;
+                entity.edited = true;
+                entity.saved = false;
+            }
+        },
+        setEntityStatus: (state, action: PayloadAction<{ entityId: number, edited?: boolean, saved?: boolean }>) => {
+            const entity = state.entityTrees[action.payload.entityId];
+
+            if (entity) {
+                entity.edited = action.payload.edited ?? entity.edited;
+                entity.saved = action.payload.saved ?? entity.saved;
+            }
         },
         generateTreeJson: (state, action: PayloadAction<number>) => {
             state.generated_tree_json = JSON.stringify(generateNewTreeToJsonById(action.payload, state.entityTrees));

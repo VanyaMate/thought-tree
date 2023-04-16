@@ -6,11 +6,13 @@ import {useEntityTextareaHook} from "../../../hooks/useEntityTextarea.hook";
 import {EntityTextareaComponent} from "../../../types/entityTextareaComponent";
 
 export interface IEntityTextarea extends IDefaultComponent {
-    value: string
+    value: string,
+    entityId: number,
+    onValueChange?: (text: string) => void,
 }
 
 const EntityTextarea: React.FC<IEntityTextarea> = React.forwardRef<HTMLDivElement, IEntityTextarea>((props: IEntityTextarea, ref) => {
-    const result: ReactElement[] = useEntityTextareaHook(props.value);
+    const result: ReactElement[] = useEntityTextareaHook(props.value, props.entityId, props.onValueChange);
 
     return (
         <ColorThemeContainer

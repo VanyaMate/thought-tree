@@ -7,7 +7,7 @@ import EntityTextareaColor from "../components/Entity/EntityTextarea/EntityTexta
 import EntityTextareaScrollButton
     from "../components/Entity/EntityTextarea/EntityTextareaScrollButton/EntityTextareaScrollButton";
 
-export const useEntityTextareaHook = function (value: string): ReactElement[] {
+export const useEntityTextareaHook = function (value: string, entityId: number, onValueChange?: (value: string) => void): ReactElement[] {
     const [text, setText]= useState<string>(value);
     const texts: string[] = useMemo(() => parseEntityTextarea(text), [text]);
 
@@ -31,7 +31,7 @@ export const useEntityTextareaHook = function (value: string): ReactElement[] {
                 }
 
             } catch {
-                results[i] = <EntityTextareaItem key={i} value={texts[i]}/>
+                results[i] = <EntityTextareaItem key={i} value={texts[i]} id={entityId} onValueChange={onValueChange}/>
             }
         }
 

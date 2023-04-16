@@ -7,6 +7,10 @@ export interface IEntityCreateData {
     token: string,
 }
 
+export interface IEntityUpdateData extends IEntityCreateData {
+    id: number
+}
+
 export const entitiesApi = createApi({
     reducerPath: 'api/entities',
     baseQuery: fetchBaseQuery({
@@ -29,8 +33,25 @@ export const entitiesApi = createApi({
                     text: props.text
                 },
             })
-        })
+        }),
+        updateEntity: build.query<
+            any, IEntityUpdateData
+            >({
+            query: (props) => ({
+                url: `/update/${ props.id }`,
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'authorization': `Bearer ${ props.token }`
+                },
+                cache: 'no-cache',
+                body: {
+                    title: props.title,
+                    text: props.text
+                },
+            })
+        }),
     })
 })
 
-export const { useLazyCreateEntityQuery } = entitiesApi;
+export const { useLazyCreateEntityQuery, useLazyUpdateEntityQuery } = entitiesApi;

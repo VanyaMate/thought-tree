@@ -4,7 +4,7 @@ import ColorThemeContainer from "../../Themes/ColorThemeContainer/ColorThemeCont
 import PlaygroundThemeContainer from "../../Themes/PlaygroundThemeContainer/PlaygroundThemeContainer";
 import ScrollToEntityButton from "../../Buttons/ScrollToEntityButton/ScrollToEntityButton";
 import EntityTextarea from "../EntityTextarea/EntityTextarea";
-import {useMySelector} from "../../../hooks/redux.hook";
+import {useActions, useMySelector} from "../../../hooks/redux.hook";
 import EntityCardCreateButton from "./EntityCardCreateButton/EntityCardCreateButton";
 import EntityControl from "../EntityControl/EntityControl";
 
@@ -25,14 +25,20 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
     const parentData = entities.entityTrees[props.parentId || 0]?.data;
     const currentData = entities.entityTrees[props.id];
     const user = useMySelector((state) => state.user);
+    const {updateEntityData} = useActions();
 
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={`ent_${ currentData.data.id }`} data-root-entity={props.root ?? 'false'}>
-            <ColorThemeContainer themeStyles={css} className={css.card}>
+            <ColorThemeContainer themeStyles={css} className={[css.card, currentData.saved ? '' : css.edited].join(' ')}>
                 <EntityControl id={props.id}/>
                 <ScrollToEntityButton entityId={parentData?.id} className={css.parent}/>
                 <h4 className={css.title}>{ currentData.data.title }</h4>
-                <EntityTextarea className={css.text} value={ currentData.data.text }/><br/>
+                <EntityTextarea
+                    className={css.text}
+                    value={ currentData.data.text }
+                    entityId={props.id}
+                    onValueChange={(text) => updateEntityData({ entityId: props.id, data: { text } })}
+                /><br/>
                 {
                     currentData.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point}/>)
                 }
