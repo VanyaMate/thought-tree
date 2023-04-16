@@ -15,7 +15,7 @@ const PlaygroundContentControl = () => {
     useEffect(() => {
         if (entities.generated_tree_json) {
             dispatchUpdateTreeJson({
-                id: treeId,
+                id: Number(treeId),
                 tree_json: entities.generated_tree_json,
                 token: auth.bearer
             })

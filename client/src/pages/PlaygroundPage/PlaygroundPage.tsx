@@ -16,6 +16,7 @@ const PlaygroundPage = () => {
 
     useEffect(() => {
         // dispatch getting data after change pathname
+        resetCurrentEntity();
         dispatchGettingData({ id: +params.treeId!, token: auth.bearer });
     }, [pathname])
 

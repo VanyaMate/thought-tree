@@ -6,6 +6,7 @@ import ScrollToEntityButton from "../../Buttons/ScrollToEntityButton/ScrollToEnt
 import EntityTextarea from "../EntityTextarea/EntityTextarea";
 import {useMySelector} from "../../../hooks/redux.hook";
 import EntityCardCreateButton from "./EntityCardCreateButton/EntityCardCreateButton";
+import EntityControl from "../EntityControl/EntityControl";
 
 export interface IEntityCard {
     ref?: any,
@@ -28,16 +29,12 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
     return (
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={`ent_${ currentData.data.id }`} data-root-entity={props.root ?? 'false'}>
             <ColorThemeContainer themeStyles={css} className={css.card}>
-                <ScrollToEntityButton
-                    entityId={parentData?.id || -1}
-                    className={css.parent}
-                >
-                    {parentData?.title}
-                </ScrollToEntityButton>
+                <EntityControl id={props.id}/>
+                <ScrollToEntityButton entityId={parentData?.id} className={css.parent}/>
                 <h4 className={css.title}>{ currentData.data.title }</h4>
                 <EntityTextarea className={css.text} value={ currentData.data.text }/><br/>
                 {
-                    currentData.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point}>{entities.entityTrees[point].data.title}</ScrollToEntityButton>)
+                    currentData.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point}/>)
                 }
                 <EntityCardCreateButton hidden={false} toEntity={props.id} user={user.login}/>
             </ColorThemeContainer>

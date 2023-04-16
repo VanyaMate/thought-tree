@@ -60,6 +60,12 @@ export const entitiesSlice = createSlice({
                 entity.redactMode = action.payload.mode;
             }
         },
+        toggleEntityRedactMode: (state, action: PayloadAction<number>) => {
+            const entity = state.entityTrees[action.payload];
+            if (entity) {
+                entity.redactMode = !entity.redactMode;
+            }
+        },
         setCurrentTreeJson: (state, action: PayloadAction<string>) => {
             state.tree_json = action.payload;
 
@@ -79,13 +85,11 @@ export const entitiesSlice = createSlice({
         },
         generateTreeJson: (state, action: PayloadAction<number>) => {
             state.generated_tree_json = JSON.stringify(generateNewTreeToJsonById(action.payload, state.entityTrees));
-            console.log(state.generated_tree_json);
         },
         resetCurrentEntity: (state) => {
-
-        },
-        addChildToCurrentEntity: (state, action: PayloadAction<any>) => {
-
+            state.entityTrees = {};
+            state.tree_json = '';
+            state.rootId = -1;
         }
     }
 })

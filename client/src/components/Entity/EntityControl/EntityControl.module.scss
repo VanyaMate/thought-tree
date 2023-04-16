@@ -1,0 +1,8 @@
+@import "src/styles/sizes";
+
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: $smallOffset;
+}

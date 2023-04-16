@@ -4,7 +4,6 @@ import EntityCard from "./EntityCard/EntityCard";
 import ColorThemeContainer from "../Themes/ColorThemeContainer/ColorThemeContainer";
 import EntityLine from "./EntityLine/EntityLine";
 import {useMySelector} from "../../hooks/redux.hook";
-import EntityCardCreateButton from "./EntityCard/EntityCardCreateButton/EntityCardCreateButton";
 
 export interface IEntityData {
     id: number,
@@ -33,7 +32,6 @@ const Entity: React.FC<IEntityComponent> = (props) => {
     const card = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
     const entities = useMySelector((state) => state.entities);
-    const user = useMySelector((state) => state.user);
     const current = entities.entityTrees[props.id];
 
     useEffect(() => {
@@ -44,7 +42,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
 
             setWidth(xDelta);
         }
-    }, [])
+    }, [entities.entityTrees])
 
     if (!current) {
         return <>Loading</>
@@ -56,7 +54,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
             <EntityCard {...props} ref={card} parentId={props.parentId} id={props.id} root={props.root}/>
             <div className={css.points}>
                 {
-                    current.points.map((point, index) => <Entity key={index} parentCard={card} parentId={props.id} id={point}/>)
+                    current.points.map((point) => <Entity key={point} parentCard={card} parentId={props.id} id={point}/>)
                 }
             </div>
         </ColorThemeContainer>

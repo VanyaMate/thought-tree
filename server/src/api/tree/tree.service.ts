@@ -21,9 +21,15 @@ export class TreeService {
             const [_, token] = authToken.split(' ');
             const { id: author_id, login } = this.jwtService.decode(token) as { id: number, login: string };
 
+            const entity = await this.entityPointService.create({
+                title: treeDto.title,
+                text: treeDto.description || 'some entity text',
+            }, authToken);
+
             const tree = await this.treeRepository.create({
                 ...treeDto,
-                author_id
+                author_id,
+                tree_json: JSON.stringify({ id: entity.id, points: [] })
             })
 
             return {...tree.dataValues, author: login};
