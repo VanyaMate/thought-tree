@@ -24,7 +24,7 @@ const PlaygroundContentControl = () => {
 
     return (
         <div className={css.container}>
-            <SmallButton className={[css.button].join(' ')} onClick={() => generateTreeJson(entities.rootId)} active/>
+            <SmallButton className={[css.button].join(' ')} onClick={() => generateTreeJson(entities.treeRootId)} active/>
         </div>
     );
 };

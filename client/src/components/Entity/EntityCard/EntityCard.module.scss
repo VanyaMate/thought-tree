@@ -9,10 +9,10 @@ $cardWidth: 400px;
     position: relative;
     z-index: 2;
     border-radius: $mediumOffset;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
 
     &.edited {
-        border: 1px solid red;
+        border: 2px dotted $markBlueLight;
     }
 
     .parent {

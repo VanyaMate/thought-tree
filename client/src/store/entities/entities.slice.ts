@@ -15,7 +15,9 @@ export interface IEntitiesSliceData {
     tree_json: string,
     generated_tree_json: string,
     entityTrees: entityTree,
+    treeRootId: number,
     rootId: number,
+    treeId: number,
 }
 
 export interface IEntityJsonPoint {
@@ -27,7 +29,9 @@ const initialState: IEntitiesSliceData = {
     tree_json: '',                  // Устанавливается один раз, из него формируется entityTrees и rootId
     generated_tree_json: '',        // Генерируется из entityTrees в json для сохранения
     entityTrees: {},                // Содержит список всех ентити с их родителями
+    treeRootId: -1,                 // Содержит в себе id с которого начинается дерево
     rootId: -1,                     // Содержит в себе id с которого начать строить дерево
+    treeId: -1,                     // Содержит в себе id дерева
 }
 
 // Сгенерировать entityTrees из дерева
@@ -75,12 +79,16 @@ export const entitiesSlice = createSlice({
 
             try {
                 const rootEntity = JSON.parse(action.payload) as IEntity;
+                state.treeRootId = rootEntity.data.id;
                 state.rootId = rootEntity.data.id;
                 state.entityTrees = getEntityTreesByTree(rootEntity, {});
             }
             catch (e) {
                 state.entityTrees = {};
             }
+        },
+        setCurrentTreeId: (state, action: PayloadAction<number>) => {
+            state.treeId = action.payload;
         },
         addNewPointToEntity: (state, action: PayloadAction<{ entityId: number, point: IEntityPoint }>) => {
             const newPointId = action.payload.point.data.id;
@@ -107,6 +115,9 @@ export const entitiesSlice = createSlice({
         },
         generateTreeJson: (state, action: PayloadAction<number>) => {
             state.generated_tree_json = JSON.stringify(generateNewTreeToJsonById(action.payload, state.entityTrees));
+        },
+        setEntityRootId: (state, action: PayloadAction<number>) => {
+            state.rootId = action.payload;
         },
         resetCurrentEntity: (state) => {
             state.entityTrees = {};
