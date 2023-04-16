@@ -90,10 +90,7 @@ export const entitiesSlice = createSlice({
         updateEntityData: (state, action: PayloadAction<{ entityId: number, data: { title?: string, text?: string } }>) => {
             const entity = state.entityTrees[action.payload.entityId];
 
-            console.log(action.payload.data.title, action.payload.data.text);
-
             if (entity && (action.payload.data.title || action.payload.data.text)) {
-                console.log('update entity data');
                 entity.data.title = action.payload.data.title ?? entity.data.title;
                 entity.data.text = action.payload.data.text ?? entity.data.text;
                 entity.edited = true;
