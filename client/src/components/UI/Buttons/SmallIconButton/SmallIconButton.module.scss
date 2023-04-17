@@ -1,0 +1,47 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    position: relative;
+
+    .button {
+        width: $mediumSmallHeight;
+        height: $mediumSmallHeight;
+        padding: 0;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: none !important;
+        opacity: .3;
+
+        &.onActive {
+            opacity: 1;
+        }
+
+        &:hover {
+            .icon {
+                filter: invert(1);
+            }
+        }
+
+        .icon {
+            width: 60%;
+            height: 60%;
+        }
+    }
+
+    &.dark {
+        .button {
+            .icon {
+                filter: invert(1);
+            }
+        }
+    }
+
+    &.light {
+
+    }
+}

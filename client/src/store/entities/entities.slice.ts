@@ -57,7 +57,6 @@ const generateNewTreeToJsonById = function (currentId: number, entityTrees: enti
     currentPoint.id = currentId;
     currentPoint.points = entityTrees[currentId].points.map((point) => entityTrees[point] && generateNewTreeToJsonById(point, entityTrees)).filter((point) => !!point);
 
-    console.log('generate new tree to json by id', currentPoint.id);
     return currentPoint;
 }
 

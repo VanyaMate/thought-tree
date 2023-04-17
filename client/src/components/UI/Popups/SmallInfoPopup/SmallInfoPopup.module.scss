@@ -1,0 +1,35 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    position: absolute;
+    bottom: calc(100% + #{$smallOffset});
+    left: 50%;
+    transform: translateX(-50%);
+    transition: padding .1s, height .1s, margin .1s;
+
+    padding: $smallOffset $mediumOffset;
+    max-width: 140px;
+    overflow: hidden;
+    text-align: center;
+
+    border-radius: $smallOffset;
+    font-size: 12px;
+    margin-bottom: 0;
+
+    &.hidden {
+        height: 0;
+        padding: 0 $smallOffset;
+        margin-bottom: -5px;
+    }
+
+    &.dark {
+        background: $black;
+        color: $lightGray;
+    }
+
+    &.light {
+        background: $grayBlack;
+        color: $white;
+    }
+}
