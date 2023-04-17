@@ -32,7 +32,12 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
             <ColorThemeContainer themeStyles={css} className={[css.card, currentData.saved ? '' : css.edited].join(' ')}>
                 <EntityControl id={props.id}/>
                 <ScrollToEntityButton entityId={parentData?.id} className={css.parent}/>
-                <h4 className={css.title}>{ currentData.data.title }</h4>
+                <EntityTextarea
+                    className={css.title}
+                    value={ currentData.data.title }
+                    entityId={props.id}
+                    onValueChange={(title) => updateEntityData({ entityId: props.id, data: { title } })}
+                />
                 <EntityTextarea
                     className={css.text}
                     value={ currentData.data.text }

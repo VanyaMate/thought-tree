@@ -41,6 +41,7 @@ $cardWidth: 400px;
     }
 
     .title {
+        display: block;
         text-transform: capitalize;
         margin-bottom: $mediumOffset;
         font-size: 20px;

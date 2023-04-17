@@ -36,25 +36,28 @@ const initialState: IEntitiesSliceData = {
 
 // Сгенерировать entityTrees из дерева
 const getEntityTreesByTree = function (tree: IEntity, entityTrees: entityTree) {
-    entityTrees[tree.data.id] = {
-        data: tree.data,
-        redactMode: false,
-        edited: false,
-        saved: true,
-        points: tree.points.map((point) => point.data.id)
-    }
+    if (tree.data) {
+        entityTrees[tree.data.id] = {
+            data: tree.data,
+            redactMode: false,
+            edited: false,
+            saved: true,
+            points: tree.points.map((point) => point.data && point.data.id)
+        }
 
-    tree.points.forEach((point) => {
-        getEntityTreesByTree(point, entityTrees);
-    })
+        tree.points.forEach((point) => {
+            getEntityTreesByTree(point, entityTrees);
+        })
+    }
 
     return entityTrees;
 }
 
 const generateNewTreeToJsonById = function (currentId: number, entityTrees: entityTree, currentPoint = {} as IEntityJsonPoint) {
     currentPoint.id = currentId;
-    currentPoint.points = entityTrees[currentId].points.map((point) => generateNewTreeToJsonById(point, entityTrees))
+    currentPoint.points = entityTrees[currentId].points.map((point) => entityTrees[point] && generateNewTreeToJsonById(point, entityTrees)).filter((point) => !!point);
 
+    console.log('generate new tree to json by id', currentPoint.id);
     return currentPoint;
 }
 
@@ -84,6 +87,7 @@ export const entitiesSlice = createSlice({
                 state.entityTrees = getEntityTreesByTree(rootEntity, {});
             }
             catch (e) {
+                console.log(e);
                 state.entityTrees = {};
             }
         },
@@ -94,6 +98,9 @@ export const entitiesSlice = createSlice({
             const newPointId = action.payload.point.data.id;
             state.entityTrees[newPointId] = action.payload.point;
             state.entityTrees[action.payload.entityId].points.push(newPointId);
+        },
+        removeEntity: (state, action: PayloadAction<number>) => {
+            delete state.entityTrees[action.payload];
         },
         updateEntityData: (state, action: PayloadAction<{ entityId: number, data: { title?: string, text?: string } }>) => {
             const entity = state.entityTrees[action.payload.entityId];
@@ -115,6 +122,7 @@ export const entitiesSlice = createSlice({
         },
         generateTreeJson: (state, action: PayloadAction<number>) => {
             state.generated_tree_json = JSON.stringify(generateNewTreeToJsonById(action.payload, state.entityTrees));
+            console.log(state.generated_tree_json);
         },
         setEntityRootId: (state, action: PayloadAction<number>) => {
             state.rootId = action.payload;

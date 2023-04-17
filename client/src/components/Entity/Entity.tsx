@@ -45,7 +45,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
     }, [entities.entityTrees])
 
     if (!current) {
-        return <>Loading</>
+        return <></>
     }
 
     return (

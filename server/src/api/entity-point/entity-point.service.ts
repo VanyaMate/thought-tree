@@ -31,7 +31,15 @@ export class EntityPointService {
 
     async delete (id: number, authToken: string) {
         try {
+            const [_, token] = authToken.split(' ');
+            const { id: author_id, login } = this.jwtService.decode(token) as { id: number, login: string };
 
+            const entity = await this.entityRepository.findByPk(id);
+
+            if (entity && entity.author_id === author_id) {
+                await entity.destroy();
+                return true;
+            }
         }
         catch (e) {
             throw new HttpException('Неверные данные', HttpStatus.BAD_REQUEST);

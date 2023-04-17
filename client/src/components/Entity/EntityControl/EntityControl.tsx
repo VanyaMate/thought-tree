@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import css from './EntityControl.module.scss';
 import {useActions, useMySelector} from "../../../hooks/redux.hook";
-import {useLazyUpdateEntityQuery} from "../../../store/entities/entities.api";
+import {useLazyDeleteEntityQuery, useLazyUpdateEntityQuery} from "../../../store/entities/entities.api";
 import {useNavigate, useParams} from "react-router-dom";
 
 export interface IEntityControlId {
@@ -11,10 +11,11 @@ export interface IEntityControlId {
 const EntityControl: React.FC<IEntityControlId> = (props) => {
     const navigation = useNavigate();
     const params = useParams<{ treeId: string }>();
-    const { toggleEntityRedactMode, setEntityStatus, setEntityRootId } = useActions();
+    const { toggleEntityRedactMode, setEntityStatus, setEntityRootId, removeEntity } = useActions();
     const entities = useMySelector((state) => state.entities);
     const auth = useMySelector((state) => state.auth);
     const [dispatchEntityUpdate, {}] = useLazyUpdateEntityQuery();
+    const [dispatchDelete, {}] = useLazyDeleteEntityQuery();
 
     const currentData = useMemo(() => entities.entityTrees[props.id], [entities.entityTrees[props.id]]);
 
@@ -24,6 +25,12 @@ const EntityControl: React.FC<IEntityControlId> = (props) => {
                 dispatchEntityUpdate({ id: props.id, title: currentData.data.title, text: currentData.data.text, token: auth.bearer })
                     .then((response) => setEntityStatus({ entityId: props.id, edited: false, saved: true }))
             }>Save</div>
+            <div onClick={() => {
+                dispatchDelete({ id: props.id, token: auth.bearer })
+                    .then((response) => response.data && removeEntity(props.id));
+            }}>
+                Delete
+            </div>
             <div onClick={() => {
                 setEntityRootId(props.id);
                 navigation(`/tree/${params.treeId}/${props.id}`)

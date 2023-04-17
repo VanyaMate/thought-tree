@@ -11,6 +11,11 @@ export interface IEntityUpdateData extends IEntityCreateData {
     id: number
 }
 
+export interface IEntityDelete {
+    token: string,
+    id: number,
+}
+
 export const entitiesApi = createApi({
     reducerPath: 'api/entities',
     baseQuery: fetchBaseQuery({
@@ -51,7 +56,20 @@ export const entitiesApi = createApi({
                 },
             })
         }),
+        deleteEntity: build.query<
+            any, IEntityDelete
+            >({
+            query: (props) => ({
+                url: `/delete/${ props.id }`,
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'authorization': `Bearer ${ props.token }`
+                },
+                cache: 'no-cache',
+            })
+        }),
     })
 })
 
-export const { useLazyCreateEntityQuery, useLazyUpdateEntityQuery } = entitiesApi;
+export const { useLazyCreateEntityQuery, useLazyUpdateEntityQuery, useLazyDeleteEntityQuery } = entitiesApi;

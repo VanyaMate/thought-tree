@@ -20,7 +20,7 @@ const PlaygroundContent = () => {
                 rootEntity.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
             })
         }
-    }, [hash, entities.entityTrees, entities.rootId])
+    }, [hash, entities.rootId])
 
     return (
         <div className={css.content}>
