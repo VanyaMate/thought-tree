@@ -24,6 +24,12 @@ const EntityControl: React.FC<IEntityControlId> = (props) => {
         <div className={css.container}>
             <div className={css.left}>
                 <SmallIconButton
+                    onClick={() => toggleEntityRedactMode(props.id)}
+                    icon={'/icons/editing.png'}
+                    info={'Переключить режим редактирования'}
+                    active
+                />
+                <SmallIconButton
                     onClick={() =>
                         dispatchEntityUpdate({ id: props.id, title: currentData.data.title, text: currentData.data.text, token: auth.bearer })
                             .then((response) => setEntityStatus({ entityId: props.id, edited: false, saved: true }))
@@ -31,12 +37,6 @@ const EntityControl: React.FC<IEntityControlId> = (props) => {
                     icon={'/icons/diskette.png'}
                     info={'Сохранить'}
                     active={!entities.entityTrees[props.id].saved}
-                />
-                <SmallIconButton
-                    onClick={() => toggleEntityRedactMode(props.id)}
-                    icon={'/icons/editing.png'}
-                    info={'Переключить режим редактирования'}
-                    active
                 />
                 <SmallIconButton
                     onClick={() => {
