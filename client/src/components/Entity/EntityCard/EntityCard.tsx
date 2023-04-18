@@ -44,6 +44,7 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
                     entityId={props.id}
                     onValueChange={(text) => updateEntityData({ entityId: props.id, data: { text } })}
                 /><br/>
+                <h4 style={{marginTop: 10}}>Дочерние элементы</h4>
                 {
                     currentData.points.map((point, index) => <ScrollToEntityButton key={index} entityId={point}/>)
                 }

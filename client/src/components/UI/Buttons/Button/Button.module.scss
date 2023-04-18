@@ -32,7 +32,8 @@
         &.active {
             border: 1px solid $markBlueLight;
 
-            &:hover {
+            &:hover,
+            &.always {
                 background: $markBlueLight;
                 color: $white;
             }
@@ -47,7 +48,8 @@
         &.active {
             border: 1px solid $markBlueLight;
 
-            &:hover {
+            &:hover,
+            &.always {
                 background: rgba($markBlueLight, 1);
                 color: $white;
             }

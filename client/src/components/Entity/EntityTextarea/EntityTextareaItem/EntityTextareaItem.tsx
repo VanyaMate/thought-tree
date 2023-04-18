@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import css from './EntityTextareaItem.module.scss';
 import {EntityTextareaComponent} from "../../../../types/entityTextareaComponent";
 import {useMySelector} from "../../../../hooks/redux.hook";
@@ -12,12 +12,13 @@ export interface IEntityTextareaItem {
 const EntityTextareaItem: React.FC<IEntityTextareaItem> = (props) => {
     const entities = useMySelector((state) => state.entities);
     const textareaRef = useRef<HTMLDivElement>(null);
+    const redactMode = entities.entityTrees[props.id].redactMode;
 
     return (
         <div
-            contentEditable={entities.entityTrees[props.id].redactMode}
+            contentEditable={redactMode}
             suppressContentEditableWarning={true}
-            className={css.container}
+            className={[css.container, redactMode ? css.redactMode : ''].join(' ')}
             ref={textareaRef}
             data-entity-item={true}
             onSelect={(e) => {

@@ -4,6 +4,7 @@ import Button from "../../UI/Buttons/Button/Button";
 import {useLocation, useNavigate} from "react-router-dom";
 import {getUUID} from "../../../../../utils/methods";
 import {useMySelector} from "../../../hooks/redux.hook";
+import css from './ScrollTopEntityButton.module.scss';
 
 export interface IScrollToEntityButton extends IDefaultComponent {
     entityId: number
@@ -23,7 +24,7 @@ const ScrollToEntityButton: React.FC<IScrollToEntityButton> = (props) => {
     }
 
     return (
-        <Button active onClick={scrollHandler} className={props.className}>{ entities.entityTrees[props.entityId].data.title }</Button>
+        <Button active onClick={scrollHandler} className={[props.className, css.container].join(' ')}>{ entities.entityTrees[props.entityId].data.title }</Button>
     );
 };
 

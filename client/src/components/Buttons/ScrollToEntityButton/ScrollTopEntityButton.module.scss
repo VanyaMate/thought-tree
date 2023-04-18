@@ -1,0 +1,16 @@
+@import "src/styles/colors";
+@import "src/styles/sizes";
+
+.container {
+    padding: 0;
+    height: auto;
+    border: none !important;
+    color: $markBlueLight !important;
+    display: flex;
+    justify-content: start;
+
+    &:hover {
+        background: transparent !important;
+        text-decoration: underline;
+    }
+}

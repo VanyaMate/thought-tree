@@ -34,6 +34,8 @@ const Entity: React.FC<IEntityComponent> = (props) => {
     const entities = useMySelector((state) => state.entities);
     const current = entities.entityTrees[props.id];
 
+    console.log(props.root, props.id);
+
     useEffect(() => {
         if (card.current && props.parentCard?.current) {
             const cardPosition = card.current.getBoundingClientRect();
@@ -42,7 +44,7 @@ const Entity: React.FC<IEntityComponent> = (props) => {
 
             setWidth(xDelta);
         }
-    }, [entities.entityTrees])
+    }, [entities.entityTrees[props.parentId || -1]])
 
     if (!current) {
         return <></>

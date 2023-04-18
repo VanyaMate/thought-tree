@@ -8,7 +8,7 @@
         width: $mediumSmallHeight;
         height: $mediumSmallHeight;
         padding: 0;
-        border-radius: 50%;
+        border-radius: $mediumOffset;
 
         display: flex;
         justify-content: center;
@@ -19,12 +19,6 @@
 
         &.onActive {
             opacity: 1;
-        }
-
-        &:hover {
-            .icon {
-                filter: invert(1);
-            }
         }
 
         .icon {
@@ -42,6 +36,13 @@
     }
 
     &.light {
-
+        .button {
+            &:hover,
+            &.onAlways {
+                .icon {
+                    filter: invert(1);
+                }
+            }
+        }
     }
 }

@@ -31,25 +31,6 @@ export default React.memo(EntityTextarea);
 
 
 
-// *CONTAINER*
-// DIV -> ITEM'S
-
-// *ITEM*
-// DIV editable
-
-/**
- *  CONTAINER
- *
- *  IF value === 'text'
- *      return ITEM (value)
- *  ELSE
- *      return CONTAINER (value)
- *
- */
-
-
-
-
 
 
 

@@ -18,6 +18,7 @@ const SmallIconButton: React.FC<ISmallIconButton> = (props) => {
                 {...props}
                 className={css.button}
                 activeStyle={css.onActive}
+                alwaysStyle={css.onAlways}
                 onMouseOver={() => setShowInfo(true)}
                 onMouseOut={() => setShowInfo(false)}
             >
