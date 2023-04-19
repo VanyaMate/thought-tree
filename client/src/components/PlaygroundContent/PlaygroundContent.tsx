@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import css from './PlaygroundContent.module.scss';
 import {useLocation} from 'react-router-dom'
 import {useMySelector} from "../../hooks/redux.hook";
-import Entity from "../Entity/Entity";
+import Entity from "../ReEntity/Entity";
 
 const PlaygroundContent = () => {
     const { hash } = useLocation();
-    const rootId = useMySelector((state) => state.entities.rootId);
+    const rootId = useMySelector((state) => state.tree.currentRootId);
 
     useEffect(() => {
         const entity = document.querySelector(`${hash.split('-')[0] || 'noelementselector'}`);
@@ -24,7 +24,7 @@ const PlaygroundContent = () => {
 
     return (
         <div className={css.content}>
-            <Entity root={true} id={rootId}/>
+            <Entity id={rootId}/>
         </div>
     );
 };

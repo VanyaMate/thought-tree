@@ -5,14 +5,15 @@ import {useLazyGetTreeByIdQuery} from "../../store/tree/tree.api";
 import {useActions, useMySelector} from "../../hooks/redux.hook";
 import {
     concatenateTreeWithEntity
-} from "../../../utils/entities/concatenateTreeJsonWithEntity";
+} from "../../../utils/entities/entity-tree-json.methods";
 
 const PlaygroundPage = () => {
     const { pathname } = useLocation();
     const params = useParams<{ treeId: string, rootId: string }>();
-    const { setCurrentTreeJson, resetCurrentEntity, setEntityRootId, setCurrentTreeId } = useActions();
+    const { setTreeJson, resetEntityList, setTreeRootId, setTreeCurrentRootId, setTreeId, setEntityListByJson } = useActions();
     const auth = useMySelector((state) => state.auth);
-    const entities = useMySelector((state) => state.entities);
+    const re_entities = useMySelector((state) => state.re_entities);
+    const tree = useMySelector((state) => state.tree);
     const [dispatchGettingData, { isFetching, isError, data }] = useLazyGetTreeByIdQuery();
 
     /**
@@ -20,25 +21,30 @@ const PlaygroundPage = () => {
      */
     useEffect(() => {
         // dispatch getting data after change pathname
-        if (entities.treeId !== Number(params.treeId)) {
-            resetCurrentEntity();
+        if (tree.treeId !== Number(params.treeId)) {
+            resetEntityList();
             dispatchGettingData({ id: +params.treeId!, token: auth.bearer }).then(({ data }) => {
-                setCurrentTreeId(Number(params.treeId));
+                setTreeId(Number(params.treeId));
                 if (data?.tree && data.entities?.length) {
-                    const tree = JSON.parse(data.tree.tree_json)
-                    setCurrentTreeJson(JSON.stringify(concatenateTreeWithEntity(tree, data.entities)));
+                    const tree = JSON.parse(data.tree.tree_json);
+                    const entitiesTree = concatenateTreeWithEntity(tree, data.entities);
+
+                    setTreeCurrentRootId(tree.id);
+                    setTreeRootId(tree.id);
+                    setTreeJson(JSON.stringify(entitiesTree));
+                    setEntityListByJson(entitiesTree);
                 } else {
-                    resetCurrentEntity();
+                    resetEntityList();
                 }
 
                 if (params.rootId) {
-                    setEntityRootId(Number(params.rootId));
+                    setTreeCurrentRootId(Number(params.rootId));
                 }
             });
         } else if (params.rootId) {
-            setEntityRootId(Number(params.rootId));
+            setTreeCurrentRootId(Number(params.rootId));
         } else {
-            setEntityRootId(entities.treeRootId);
+            setTreeCurrentRootId(tree.rootId);
         }
     }, [pathname]);
 

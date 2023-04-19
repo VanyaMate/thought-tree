@@ -10,7 +10,7 @@ import PlaygroundContentControl
 
 const Playground = () => {
     const playground = useMySelector(state => state.playground);
-    const {setPlaygroundCoords} = useActions();
+    const { setPlaygroundCoords } = useActions();
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

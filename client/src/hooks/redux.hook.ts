@@ -6,13 +6,16 @@ import {playgroundActions} from "../store/playground/playground.slice";
 import {entitiesActions} from "../store/entities/entities.slice";
 import {authActions} from "../store/auth/auth.slice";
 import {userActions} from "../store/user/user.slice";
+import {re_entitiesActions} from "../store/reEntities/re_entities.slice";
+import {treeActions} from "../store/tree/tree.slice";
 
 const actions = {
     ...themeSliceActions,
     ...playgroundActions,
-    ...entitiesActions,
     ...authActions,
     ...userActions,
+    ...re_entitiesActions,
+    ...treeActions,
 }
 
 export const useMySelector: TypedUseSelectorHook<StoreType> = useSelector;

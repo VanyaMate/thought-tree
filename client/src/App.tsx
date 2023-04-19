@@ -38,8 +38,6 @@ const App = () => {
         }
     }, [data])
 
-    console.log('app rerender');
-
     return (
         <Gui>
             <Header/>
