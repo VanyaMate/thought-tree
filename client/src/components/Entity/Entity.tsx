@@ -31,32 +31,31 @@ export interface IEntityComponent {
 const Entity: React.FC<IEntityComponent> = (props) => {
     const card = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
-    const entities = useMySelector((state) => state.entities);
-    const current = entities.entityTrees[props.id];
-
-    console.log(props.root, props.id);
+    const { entityTrees } = useMySelector((state) => state.entities);
+    const current = entityTrees[props.id];
+    const { parentCard, parentId, id, root } = props;
 
     useEffect(() => {
-        if (card.current && props.parentCard?.current) {
+        if (card.current && parentCard?.current) {
             const cardPosition = card.current.getBoundingClientRect();
-            const parentCardPosition = props.parentCard.current.getBoundingClientRect();
+            const parentCardPosition = parentCard.current.getBoundingClientRect();
             const xDelta = cardPosition.left - parentCardPosition.left;
 
             setWidth(xDelta);
         }
-    }, [entities.entityTrees[props.parentId || -1]])
+    }, [entityTrees[parentId || -1]])
 
     if (!current) {
-        return <></>
+        return <></>;
     }
 
     return (
         <ColorThemeContainer themeStyles={css} className={css.container}>
             <EntityLine width={width}/>
-            <EntityCard {...props} ref={card} parentId={props.parentId} id={props.id} root={props.root}/>
+            <EntityCard ref={card} parentId={parentId} id={id} root={root}/>
             <div className={css.points}>
                 {
-                    current.points.map((point) => <Entity key={point} parentCard={card} parentId={props.id} id={point}/>)
+                    current.points.map((point) => <Entity key={point} parentCard={card} parentId={id} id={point}/>)
                 }
             </div>
         </ColorThemeContainer>

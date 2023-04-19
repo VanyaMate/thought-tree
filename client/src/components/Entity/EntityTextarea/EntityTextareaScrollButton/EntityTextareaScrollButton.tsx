@@ -10,12 +10,12 @@ export interface IEntityTextareaScrollButton extends IDefaultComponent {
     value: string,
     entityId: string,
     data: {
-        entityId: string
+        entityId: number
     }
 }
 
 const EntityTextareaScrollButton: React.FC<IEntityTextareaScrollButton> = (props) => {
-    const result: ReactElement[] = useEntityTextareaHook(props.value);
+    const result: ReactElement[] = useEntityTextareaHook(props.value, props.data.entityId);
 
     return (
         <ColorThemeContainer

@@ -5,6 +5,7 @@ export type entityTree = { [key: number]: IEntityPoint };
 
 export interface IEntityPoint {
     data: IEntityData,              // Информация об entity
+    redactedData: IEntityData,      // Измененная информация
     redactMode: boolean,            // Мод редактирования
     edited: boolean,                // Было изменено
     saved: boolean,                 // Данные совпадают с БД
@@ -39,6 +40,7 @@ const getEntityTreesByTree = function (tree: IEntity, entityTrees: entityTree) {
     if (tree.data) {
         entityTrees[tree.data.id] = {
             data: tree.data,
+            redactedData: tree.data,
             redactMode: false,
             edited: false,
             saved: true,
@@ -101,15 +103,32 @@ export const entitiesSlice = createSlice({
         removeEntity: (state, action: PayloadAction<number>) => {
             delete state.entityTrees[action.payload];
         },
-        updateEntityData: (state, action: PayloadAction<{ entityId: number, data: { title?: string, text?: string } }>) => {
+        updateEntityData: (state, action: PayloadAction<number>) => {
+            const entity = state.entityTrees[action.payload];
+            entity.data.title = entity.redactedData.title;
+            entity.data.text = entity.redactedData.text;
+            entity.edited = false;
+            entity.saved = true;
+        },
+        updateEntityRedactData: (state, action: PayloadAction<{ entityId: number, data: { title?: string, text?: string } }>) => {
+            console.log('update data', action.payload);
             const entity = state.entityTrees[action.payload.entityId];
 
             if (entity && (action.payload.data.title || action.payload.data.text)) {
-                entity.data.title = action.payload.data.title ?? entity.data.title;
-                entity.data.text = action.payload.data.text ?? entity.data.text;
+                entity.redactedData.title = action.payload.data.title ?? entity.redactedData.title;
+                entity.redactedData.text = action.payload.data.text ?? entity.redactedData.text;
                 entity.edited = true;
                 entity.saved = false;
             }
+        },
+        discardEntityChanges: (state, action: PayloadAction<number>) => {
+            const entity = state.entityTrees[action.payload];
+
+            entity.redactedData.title = entity.data.title;
+            entity.redactedData.text = entity.data.text;
+
+            entity.edited = false;
+            entity.saved = true;
         },
         setEntityStatus: (state, action: PayloadAction<{ entityId: number, edited?: boolean, saved?: boolean }>) => {
             const entity = state.entityTrees[action.payload.entityId];

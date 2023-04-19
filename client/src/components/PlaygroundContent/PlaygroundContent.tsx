@@ -6,7 +6,7 @@ import Entity from "../Entity/Entity";
 
 const PlaygroundContent = () => {
     const { hash } = useLocation();
-    const entities = useMySelector((state) => state.entities);
+    const rootId = useMySelector((state) => state.entities.rootId);
 
     useEffect(() => {
         const entity = document.querySelector(`${hash.split('-')[0] || 'noelementselector'}`);
@@ -20,11 +20,11 @@ const PlaygroundContent = () => {
                 rootEntity.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
             })
         }
-    }, [hash, entities.rootId])
+    }, [hash, rootId])
 
     return (
         <div className={css.content}>
-            <Entity root={true} id={entities.rootId}/>
+            <Entity root={true} id={rootId}/>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, {ReactElement, useMemo, useState} from "react";
+import React, {ReactElement, useEffect, useMemo, useState} from "react";
 import EntityTextareaItem from "../components/Entity/EntityTextarea/EntityTextareaItem/EntityTextareaItem";
 import EntityTextarea from "../components/Entity/EntityTextarea/EntityTextarea";
 import {parseEntityTextarea} from "../components/Entity/EntityTextarea/parseEntityTextarea";
@@ -7,8 +7,15 @@ import EntityTextareaColor from "../components/Entity/EntityTextarea/EntityTexta
 import EntityTextareaScrollButton
     from "../components/Entity/EntityTextarea/EntityTextareaScrollButton/EntityTextareaScrollButton";
 
-export const useEntityTextareaHook = function (value: string, entityId: number, onValueChange?: (value: string) => void): ReactElement[] {
-    const [text, setText]= useState<string>(value);
+export const useEntityTextareaHook = function (value: string, entityId: number, onValueChange?: (id: number, value: string) => void): ReactElement[] {
+    const [text, setText] = useState<string>(value);
+
+    useEffect(() => {
+        if (value !== text) {
+            setText(value);
+        }
+    }, [value])
+
     const texts: string[] = useMemo(() => parseEntityTextarea(text), [text]);
 
     return useMemo<ReactElement[]>(() => {

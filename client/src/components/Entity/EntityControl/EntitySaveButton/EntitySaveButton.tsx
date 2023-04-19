@@ -9,14 +9,22 @@ const EntitySaveButton: React.FC<IEntityId> = (props) => {
     const [dispatchEntityUpdate, {}] = useLazyUpdateEntityQuery();
     const auth = useMySelector((state) => state.auth);
     const currentData = useMemo(() => entities.entityTrees[props.id], [entities.entityTrees[props.id]]);
-    const { setEntityStatus } = useActions();
+    const { setEntityStatus, updateEntityData, setEntityRedactMode } = useActions();
 
     return (
         <SmallIconButton
-            onClick={() =>
-                dispatchEntityUpdate({ id: props.id, title: currentData.data.title, text: currentData.data.text, token: auth.bearer })
-                    .then((response) => setEntityStatus({ entityId: props.id, edited: false, saved: true }))
-            }
+            onClick={() => {
+                updateEntityData(props.id);
+                setEntityRedactMode({id: props.id, mode: false});
+                dispatchEntityUpdate({
+                    id: props.id,
+                    title: currentData.redactedData.title,
+                    text: currentData.redactedData.text,
+                    token: auth.bearer
+                })
+                    .then((response) => setEntityStatus({entityId: props.id, edited: false, saved: true}))
+
+            }}
             icon={'/icons/diskette.png'}
             info={'Сохранить'}
             active={!entities.entityTrees[props.id].saved}

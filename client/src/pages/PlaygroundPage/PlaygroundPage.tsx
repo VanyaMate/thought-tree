@@ -23,7 +23,6 @@ const PlaygroundPage = () => {
         if (entities.treeId !== Number(params.treeId)) {
             resetCurrentEntity();
             dispatchGettingData({ id: +params.treeId!, token: auth.bearer }).then(({ data }) => {
-                console.log(data);
                 setCurrentTreeId(Number(params.treeId));
                 if (data?.tree && data.entities?.length) {
                     const tree = JSON.parse(data.tree.tree_json)
@@ -41,7 +40,7 @@ const PlaygroundPage = () => {
         } else {
             setEntityRootId(entities.treeRootId);
         }
-    }, [pathname])
+    }, [pathname]);
 
     return (
         <Playground/>
