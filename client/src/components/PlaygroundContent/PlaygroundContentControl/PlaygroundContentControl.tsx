@@ -9,7 +9,6 @@ const PlaygroundContentControl = () => {
     const entities = useMySelector((state) => state.entities);
     const auth = useMySelector((state) => state.auth);
     const { treeId } = useParams();
-    const { generateTreeJson } = useActions();
     const [dispatchUpdateTreeJson] = useLazyUpdateTreeJsonQuery();
 
     useEffect(() => {
@@ -24,7 +23,6 @@ const PlaygroundContentControl = () => {
 
     return (
         <div className={css.container}>
-            <SmallButton className={[css.button].join(' ')} onClick={() => generateTreeJson(entities.treeRootId)} active/>
         </div>
     );
 };
