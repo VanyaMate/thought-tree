@@ -10,8 +10,6 @@ const Entity: React.FC<{ id: number }> = ({ id }) => {
     const entity = re_entities.list[id];
     const { toggleEntityRedactMode } = useActions();
 
-    console.log('rerender', id);
-
     if (!entity) {
         return <></>;
     }
