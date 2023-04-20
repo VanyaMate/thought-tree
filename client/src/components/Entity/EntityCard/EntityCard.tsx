@@ -22,7 +22,6 @@ export interface IEntityCard {
 
 const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEntityCard>((props, ref) => {
     const { entityTrees } = useMySelector((state) => state.entities);
-    const parentData = entityTrees[props.parentId || 0]?.data;
     const currentData = entityTrees[props.id];
     const user = useMySelector((state) => state.user);
     const {updateEntityRedactData} = useActions();
@@ -35,7 +34,7 @@ const EntityCard: React.FC<IEntityCard> = React.forwardRef<HTMLDivElement, IEnti
         <PlaygroundThemeContainer themeStyles={css} className={css.cardType} data-entity={'true'} ref={ref} id={`ent_${ currentData.data.id }`} data-root-entity={props.root ?? 'false'}>
             <ColorThemeContainer themeStyles={css} className={[css.card, currentData.saved ? '' : css.edited].join(' ')}>
                 <EntityControl id={props.id}/>
-                <ScrollToEntityButton entityId={parentData?.id} className={css.parent}/>
+                <ScrollToEntityButton entityId={props.parentId ?? -1} className={css.parent}/>
                 <EntityTextarea
                     className={css.title}
                     value={ currentData.data.title }

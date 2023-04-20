@@ -28,4 +28,4 @@ const ScrollToEntityButton: React.FC<IScrollToEntityButton> = (props) => {
     );
 };
 
-export default ScrollToEntityButton;
+export default React.memo(ScrollToEntityButton);
